@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Forum</title>
+    <link rel="stylesheet" href="../shared.css">
+    <style>
+        .dash-tab { padding: 10px 20px; font-weight: bold; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; }
+        .dash-tab.active { color: var(--accent); border-bottom: 3px solid var(--accent); }
+        .dash-content { display: none; }
+        .dash-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Social Forum</div>
+        <div class="search-bar" style="display:flex; flex-grow:1; max-width:400px; margin: 0 20px;">
+            <input type="text" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'">
+        </div>
+        <nav class="nav-links" style="display: flex; align-items: center; gap: 10px;">
+            <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+            <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
+            <button onclick="toggleLang(event)" class="btn btn-secondary" style="padding: 5px 10px; font-size: 14px;" data-ar="English" data-en="العربية">English</button>
+            <a href="../login_register/index.html" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+        </nav>
+    </header>
+    <div class="layout-container">
+        <aside class="global-sidebar">
+            <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
+            <ul>
+                <li><a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                <li><a href="../search/index.html" data-ar="البحث" data-en="Search">البحث</a></li>
+                <li><a href="../create_post/index.html" data-ar="إنشاء منشور" data-en="Create Post">إنشاء منشور</a></li>
+                <li><a href="../chat/index.html" data-ar="المحادثات" data-en="Chat">المحادثات</a></li>
+                <li><a href="../categories/index.html" data-ar="الأقسام" data-en="Categories">الأقسام</a></li>
+                <li><a href="../trending/index.html" data-ar="الشائع" data-en="Trending">الشائع</a></li>
+                <li><a href="../polls/index.html" data-ar="الاستطلاعات" data-en="Polls">الاستطلاعات</a></li>
+            </ul>
+            <h3 style="margin-top:20px;" data-ar="الإعدادات والتحكم" data-en="Settings">الإعدادات والتحكم</h3>
+            <ul>
+                <li><a href="../user_dashboard/index.html" data-ar="لوحة تحكمي" data-en="Dashboard">لوحة تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="لوحة الإدارة" data-en="Admin">لوحة الإدارة</a></li>
+                <li><a href="../moderation/index.html" data-ar="الإبلاغ والحظر" data-en="Moderation">الإبلاغ والحظر</a></li>
+                <li><a href="../create_thread/index.html" data-ar="نقاش جديد" data-en="New Thread">نقاش جديد</a></li>
+                <li><a href="../notifications/index.html" data-ar="الإشعارات" data-en="Notifications">الإشعارات</a></li>
+                <li><a href="../ads/index.html" data-ar="الإعلانات" data-en="Ads">الإعلانات</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a></li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <div class="container-box">
+                <h2 class="accent-title" data-ar="لوحة تحكم المستخدم" data-en="User Dashboard">لوحة تحكم المستخدم</h2>
+                <div style="display: flex; border-bottom: 2px solid var(--border-color); margin-bottom: 20px;">
+                    <div id="tab1" class="dash-tab active" onclick="switchDashTab(1)" data-ar="منشوراتي" data-en="My Posts">منشوراتي</div>
+                    <div id="tab2" class="dash-tab" onclick="switchDashTab(2)" data-ar="المحفوظات (Saved)" data-en="Saved">المحفوظات (Saved)</div>
+                    <div id="tab3" class="dash-tab" onclick="switchDashTab(3)" data-ar="أعجبني (Liked)" data-en="Liked">أعجبني (Liked)</div>
+                </div>
+                
+                <div id="content1" class="dash-content active">
+                    <div class="post" style="border: 1px solid var(--border-color); margin-bottom: 15px;">
+                        <h4 style="margin: 0 0 10px 0; color: var(--text-primary);">هل تعلم أن JavaScript تم ابتكارها في 10 أيام؟</h4>
+                        <p style="margin: 0 0 15px 0;">تم تصميم اللغة في عام 1995...</p>
+                        <button class="btn" style="background: #e74c3c; padding: 5px 10px;" onclick="this.closest('.post').remove()" data-ar="حذف المنشور" data-en="Delete Post">حذف المنشور</button>
+                    </div>
+                </div>
+                
+                <div id="content2" class="dash-content">
+                    <div class="post" style="border: 1px solid var(--border-color); margin-bottom: 15px;">
+                        <h4 style="margin: 0 0 10px 0; color: var(--text-primary);">كورس بايثون مجاني</h4>
+                        <p style="margin: 0 0 15px 0;">أفضل مصدر لتعلم بايثون في 2026</p>
+                        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="this.closest('.post').remove()" data-ar="إزالة من المحفوظات" data-en="Unsave">إزالة من المحفوظات</button>
+                    </div>
+                </div>
+                
+                <div id="content3" class="dash-content">
+                    <div class="post" style="border: 1px solid var(--border-color); margin-bottom: 15px;">
+                        <h4 style="margin: 0 0 10px 0; color: var(--text-primary);">الذكاء الاصطناعي في 2026</h4>
+                        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="this.closest('.post').remove()" data-ar="إزالة الإعجاب" data-en="Unlike">إزالة الإعجاب</button>
+                    </div>
+                </div>
+
+            </div>
+            
+            <script>
+            function switchDashTab(tabNum) {
+                document.getElementById('content1').classList.remove('active');
+                document.getElementById('content2').classList.remove('active');
+                document.getElementById('content3').classList.remove('active');
+                
+                document.getElementById('tab1').classList.remove('active');
+                document.getElementById('tab2').classList.remove('active');
+                document.getElementById('tab3').classList.remove('active');
+                
+                document.getElementById('content'+tabNum).classList.add('active');
+                document.getElementById('tab'+tabNum).classList.add('active');
+            }
+            </script>
+        </main>
+    </div>
+    <script src="../shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Forum</title>
+    <link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Social Forum</div>
+        <div class="search-bar" style="display:flex; flex-grow:1; max-width:400px; margin: 0 20px;">
+            <input type="text" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'">
+        </div>
+        <nav class="nav-links" style="display: flex; align-items: center; gap: 10px;">
+            <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+            <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
+            <button onclick="toggleLang(event)" class="btn btn-secondary" style="padding: 5px 10px; font-size: 14px;" data-ar="English" data-en="العربية">English</button>
+            <a href="../login_register/index.html" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+        </nav>
+    </header>
+    <div class="layout-container">
+        <aside class="global-sidebar">
+            <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
+            <ul>
+                <li><a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                <li><a href="../search/index.html" data-ar="البحث" data-en="Search">البحث</a></li>
+                <li><a href="../create_post/index.html" data-ar="إنشاء منشور" data-en="Create Post">إنشاء منشور</a></li>
+                <li><a href="../chat/index.html" data-ar="المحادثات" data-en="Chat">المحادثات</a></li>
+                <li><a href="../categories/index.html" data-ar="الأقسام" data-en="Categories">الأقسام</a></li>
+                <li><a href="../trending/index.html" data-ar="الشائع" data-en="Trending">الشائع</a></li>
+                <li><a href="../polls/index.html" data-ar="الاستطلاعات" data-en="Polls">الاستطلاعات</a></li>
+            </ul>
+            <h3 style="margin-top:20px;" data-ar="الإعدادات والتحكم" data-en="Settings">الإعدادات والتحكم</h3>
+            <ul>
+                <li><a href="../user_dashboard/index.html" data-ar="لوحة تحكمي" data-en="Dashboard">لوحة تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="لوحة الإدارة" data-en="Admin">لوحة الإدارة</a></li>
+                <li><a href="../moderation/index.html" data-ar="الإبلاغ والحظر" data-en="Moderation">الإبلاغ والحظر</a></li>
+                <li><a href="../create_thread/index.html" data-ar="نقاش جديد" data-en="New Thread">نقاش جديد</a></li>
+                <li><a href="../notifications/index.html" data-ar="الإشعارات" data-en="Notifications">الإشعارات</a></li>
+                <li><a href="../ads/index.html" data-ar="الإعلانات" data-en="Ads">الإعلانات</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a></li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <div class="container-box">
+                <h2 class="accent-title" data-ar="المواضيع الشائعة (Trending)" data-en="Trending Topics">المواضيع الشائعة (Trending)</h2>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="padding: 15px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: var(--text-secondary); margin-left: 15px;">#1</div>
+                        <div>
+                            <h3 style="margin: 0 0 5px 0;" data-ar="الذكاء الاصطناعي" data-en="Artificial Intelligence">الذكاء الاصطناعي</h3>
+                            <p style="margin: 0; color: var(--text-secondary);" data-ar="5,420 منشور" data-en="5,420 Posts">5,420 منشور</p>
+                        </div>
+                    </div>
+                    <div style="padding: 15px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: var(--text-secondary); margin-left: 15px;">#2</div>
+                        <div>
+                            <h3 style="margin: 0 0 5px 0;" data-ar="أخبار التقنية" data-en="Tech News">أخبار التقنية</h3>
+                            <p style="margin: 0; color: var(--text-secondary);" data-ar="3,100 منشور" data-en="3,100 Posts">3,100 منشور</p>
+                        </div>
+                    </div>
+                    <div style="padding: 15px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: var(--text-secondary); margin-left: 15px;">#3</div>
+                        <div>
+                            <h3 style="margin: 0 0 5px 0;" data-ar="برمجة الويب" data-en="Web Development">برمجة الويب</h3>
+                            <p style="margin: 0; color: var(--text-secondary);" data-ar="2,800 منشور" data-en="2,800 Posts">2,800 منشور</p>
+                        </div>
+                    </div>
+                    <div style="padding: 15px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: var(--text-secondary); margin-left: 15px;">#4</div>
+                        <div>
+                            <h3 style="margin: 0 0 5px 0;" data-ar="العمل الحر" data-en="Freelancing">العمل الحر</h3>
+                            <p style="margin: 0; color: var(--text-secondary);" data-ar="1,500 منشور" data-en="1,500 Posts">1,500 منشور</p>
+                        </div>
+                    </div>
+                    <div style="padding: 15px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: var(--text-secondary); margin-left: 15px;">#5</div>
+                        <div>
+                            <h3 style="margin: 0 0 5px 0;" data-ar="تعلم بايثون" data-en="Learn Python">تعلم بايثون</h3>
+                            <p style="margin: 0; color: var(--text-secondary);" data-ar="980 منشور" data-en="980 Posts">980 منشور</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../shared.js"></script>
+</body>
+</html>

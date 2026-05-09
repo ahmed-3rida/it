@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Forum</title>
+    <link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Social Forum</div>
+        <div class="search-bar" style="display:flex; flex-grow:1; max-width:400px; margin: 0 20px;">
+            <input type="text" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'">
+        </div>
+        <nav class="nav-links" style="display: flex; align-items: center; gap: 10px;">
+            <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+            <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
+            <button onclick="toggleLang(event)" class="btn btn-secondary" style="padding: 5px 10px; font-size: 14px;" data-ar="English" data-en="العربية">English</button>
+            <a href="../login_register/index.html" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+        </nav>
+    </header>
+    <div class="layout-container">
+        <aside class="global-sidebar">
+            <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
+            <ul>
+                <li><a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                <li><a href="../search/index.html" data-ar="البحث" data-en="Search">البحث</a></li>
+                <li><a href="../create_post/index.html" data-ar="إنشاء منشور" data-en="Create Post">إنشاء منشور</a></li>
+                <li><a href="../chat/index.html" data-ar="المحادثات" data-en="Chat">المحادثات</a></li>
+                <li><a href="../categories/index.html" data-ar="الأقسام" data-en="Categories">الأقسام</a></li>
+                <li><a href="../trending/index.html" data-ar="الشائع" data-en="Trending">الشائع</a></li>
+                <li><a href="../polls/index.html" data-ar="الاستطلاعات" data-en="Polls">الاستطلاعات</a></li>
+            </ul>
+            <h3 style="margin-top:20px;" data-ar="الإعدادات والتحكم" data-en="Settings">الإعدادات والتحكم</h3>
+            <ul>
+                <li><a href="../user_dashboard/index.html" data-ar="لوحة تحكمي" data-en="Dashboard">لوحة تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="لوحة الإدارة" data-en="Admin">لوحة الإدارة</a></li>
+                <li><a href="../moderation/index.html" data-ar="الإبلاغ والحظر" data-en="Moderation">الإبلاغ والحظر</a></li>
+                <li><a href="../create_thread/index.html" data-ar="نقاش جديد" data-en="New Thread">نقاش جديد</a></li>
+                <li><a href="../notifications/index.html" data-ar="الإشعارات" data-en="Notifications">الإشعارات</a></li>
+                <li><a href="../ads/index.html" data-ar="الإعلانات" data-en="Ads">الإعلانات</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a></li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <div class="container-box">
+                <h2 class="accent-title" data-ar="الإشعارات" data-en="Notifications">الإشعارات</h2>
+                
+                <div style="background: var(--bg-color); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 10px; border-right: 4px solid var(--accent);">
+                    <strong data-ar="سارة علي" data-en="Sara Ali">سارة علي</strong> 
+                    <span data-ar="علقت على منشورك" data-en="commented on your post">علقت على منشورك</span>
+                    <div style="color: var(--text-secondary); font-size: 12px; margin-top: 5px;" data-ar="قبل 5 دقائق" data-en="5 mins ago">قبل 5 دقائق</div>
+                </div>
+
+                <div style="background: var(--bg-color); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                    <strong data-ar="أحمد محمد" data-en="Ahmed Mohamed">أحمد محمد</strong> 
+                    <span data-ar="بدأ بمتابعتك" data-en="started following you">بدأ بمتابعتك</span>
+                    <div style="color: var(--text-secondary); font-size: 12px; margin-top: 5px;" data-ar="قبل ساعة" data-en="1 hour ago">قبل ساعة</div>
+                </div>
+
+                <div style="background: var(--bg-color); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                    <span data-ar="حصل منشورك على" data-en="Your post got">حصل منشورك على</span> 
+                    <strong style="color:var(--accent);" data-ar="15 إعجاب" data-en="15 likes">15 إعجاب</strong>.
+                    <div style="color: var(--text-secondary); font-size: 12px; margin-top: 5px;" data-ar="قبل يوم" data-en="1 day ago">قبل يوم</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../shared.js"></script>
+</body>
+</html>

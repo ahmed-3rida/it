@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #161A24;
+    --card-bg: #1f2937;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --accent: #0079d3; /* تم التغيير من البرتقالي للأزرق بناء على طلبك */
+    --border-color: #374151;
+    --hover-bg: #4b5563;
+}
+
+body { 
+    font-family: 'Tajawal', sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    background-color: var(--bg-color) !important; 
+    color: var(--text-primary); 
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* Navbar */
+.navbar { 
+    background-color: var(--card-bg); 
+    padding: 15px 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-bottom: 1px solid var(--border-color); 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000;
+}
+.navbar .logo { font-size: 24px; font-weight: bold; color: var(--accent); }
+.search-bar input {
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 4px; 
+    border: 1px solid var(--border-color); 
+    background: var(--bg-color); 
+    color: var(--text-primary);
+    font-family: 'Tajawal', sans-serif;
+}
+.search-bar input:focus { outline: none; border-color: var(--accent); }
+.nav-links a { font-size: 16px; font-weight: bold; margin: 0 10px; transition: color 0.3s; }
+.nav-links a:hover { color: var(--accent); }
+
+/* Layout */
+.layout-container { 
+    display: flex; 
+    max-width: 1200px; 
+    margin: 20px auto; 
+    gap: 20px; 
+    padding: 0 15px; 
+    align-items: flex-start; 
+}
+
+/* Sidebar */
+.global-sidebar { 
+    width: 250px; 
+    background: var(--card-bg); 
+    border-radius: 8px; 
+    padding: 15px; 
+    border: 1px solid var(--border-color); 
+    position: sticky; 
+    top: 80px;
+}
+.global-sidebar h3 { font-size: 14px; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 10px; }
+.global-sidebar ul { list-style: none; padding: 0; margin: 0; }
+.global-sidebar ul li a { 
+    display: block; 
+    padding: 10px; 
+    border-radius: 4px; 
+    transition: background 0.2s; 
+    color: var(--text-primary); 
+}
+.global-sidebar ul li a:hover { background-color: var(--hover-bg); color: var(--accent); }
+
+/* Main Content Area */
+.main-content { flex-grow: 1; max-width: 800px; min-width: 0; }
+
+/* Shared Components */
+.container-box { 
+    background: var(--card-bg); 
+    border-radius: 8px; 
+    padding: 20px; 
+    border: 1px solid var(--border-color); 
+    margin-bottom: 20px; 
+}
+h1, h2, h3, h4 { color: var(--text-primary); margin-top: 0;}
+.accent-title { color: var(--accent); }
+
+.btn { 
+    background: var(--accent); 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-family: inherit; 
+    transition: background 0.3s;
+}
+.btn:hover { filter: brightness(1.2); }
+.btn-secondary { background: var(--hover-bg); }
+.btn-secondary:hover { background: #6b7280; }
+
+/* Forms */
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--text-secondary); }
+.form-group input, .form-group textarea, .form-group select { 
+    width: 100%; 
+    padding: 10px; 
+    background: var(--bg-color); 
+    border: 1px solid var(--border-color); 
+    color: var(--text-primary); 
+    border-radius: 4px; 
+    font-family: inherit; 
+    box-sizing: border-box; 
+}
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+
+/* Posts */
+.post { 
+    background: var(--card-bg); 
+    border-radius: 8px; 
+    padding: 15px; 
+    margin-bottom: 15px; 
+    border: 1px solid var(--border-color); 
+}
+.post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.post-header img { width: 40px; height: 40px; border-radius: 50%; }
+.post-header .username { font-weight: bold; }
+.post-header .time { color: var(--text-secondary); font-size: 12px; }
+.post-actions { margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 10px; display: flex; gap: 15px; }
+.action-btn { 
+    background: none; 
+    border: none; 
+    color: var(--text-secondary); 
+    cursor: pointer; 
+    font-family: inherit; 
+    font-size: 14px; 
+    display: flex; 
+    align-items: center; 
+    gap: 5px; 
+}
+.action-btn:hover { color: var(--text-primary); }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .layout-container { flex-direction: column; }
+    .global-sidebar { width: 100%; position: static; }
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Routing...</title>
+    <script>
+        // ملف توجيه أساسي (Router)
+        // إذا كان المستخدم مسجل دخوله يذهب للرئيسية، وإن لم يكن يذهب لتسجيل الدخول
+        document.addEventListener("DOMContentLoaded", function() {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                window.location.href = 'home/index.html';
+            } else {
+                window.location.href = 'login_register/index.html';
+            }
+        });
+    </script>
+</head>
+<body style="background:#161A24; color:white; font-family:sans-serif; text-align:center; padding-top:50px;">
+    <h2>جاري التوجيه / Redirecting...</h2>
+</body>
+</html>
