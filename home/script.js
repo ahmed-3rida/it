@@ -32,6 +32,9 @@
         let voteText = lang === 'en' ? 'Vote' : 'تصويت';
         let resText = lang === 'en' ? 'Results:' : 'النتائج:';
 
+        let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+        let savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
+
         // Use a container or insert in reverse to keep newest at top
         // Let's iterate in reverse (Oldest to Newest) so 'afterend' puts Newest at the top
         [...combinedFeed].reverse().forEach(item => {
@@ -44,6 +47,9 @@
                 let defaultName = lang === 'en' ? 'Visitor' : 'زائر';
                 let uName = item.author || name || defaultName;
                 let firstLetter = uName.charAt(0).toUpperCase();
+                
+                let isLiked = likedPosts.find(p => p.id === String(item.id));
+                let isSaved = savedPosts.find(p => p.id === String(item.id));
                 
                 div.innerHTML = `
                     <div class="post-header">
@@ -59,9 +65,9 @@
                     <p style="color:var(--text-secondary); line-height:1.7; margin:0;">${item.content}</p>
                     ${item.media ? `<img src="${item.media}" style="width:100%; border-radius:10px; max-height:400px; object-fit:cover; margin-top:10px;">` : ''}
                     <div class="post-actions">
-                        <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span>${lang === 'en' ? 'Like' : 'أعجبني'}</span> (<span class="like-count">0</span>)</button>
+                        <button class="action-btn ${isLiked ? 'liked' : ''}" style="${isLiked ? 'color:var(--accent);' : ''}" onclick="toggleLikeGlobal(this)">👍 <span>${lang === 'en' ? 'Like' : 'أعجبني'}</span> (<span class="like-count">${isLiked ? 1 : 0}</span>)</button>
                         <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span>${lang === 'en' ? 'Comment' : 'تعليق'}</span> (<span class="comment-count">0</span>)</button>
-                        <button class="action-btn" onclick="toggleSaveGlobal(this)">🔖 <span>${lang === 'en' ? 'Save' : 'حفظ'}</span></button>
+                        <button class="action-btn ${isSaved ? 'saved' : ''}" style="${isSaved ? 'color:var(--accent);' : ''}" onclick="toggleSaveGlobal(this)">🔖 <span>${lang === 'en' ? 'Save' : 'حفظ'}</span></button>
                     </div>
                     <div class="comment-section" style="display:none;">
                         <div class="comment-input-row">
