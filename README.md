@@ -92,6 +92,23 @@ This project is the result of a collaborative effort by a dedicated team of 6 de
 
 ---
 
+---
+
+## 📚 Study Guide (Team Assignment Table)
+
+This table maps each team member to the specific files they are responsible for studying and defending.
+
+| Team Member | Module / Responsibility | Files to Study |
+| :--- | :--- | :--- |
+| **Ahmed Salman Hameed** | Core Logic, Auth, Feed & Ads | `shared.js`, `login_register/*`, `home/*`, `ads/*` |
+| **Kareem Ayman Bakr** | Community & Alerts | `categories/*`, `notifications/*` |
+| **Abdelrahman M. Khairy** | Discovery & Privacy | `trending/*`, `search/*`, `privacy_settings/*` |
+| **Youssef Safwat Arnest** | Administration & Identity | `admin_dashboard/*`, `moderation/*`, `profile/*`, `edit_profile/*` |
+| **Youssef Mohamed M.** | Content & User Analytics | `create_post/*`, `create_thread/*`, `user_dashboard/*` |
+| **Mostafa Taher Helmy** | Core Design & Interaction | `shared.css`, `polls/*`, `chat/*` |
+
+---
+
 ## 🛠️ Technologies Used
 - **HTML5**: Semantic structure and modern web standards.
 - **CSS3**: Advanced layouts (Flexbox/Grid), Variables, and Glassmorphism.
@@ -106,7 +123,7 @@ This project is the result of a collaborative effort by a dedicated team of 6 de
 ---
 
 ## 📜 How to Run
-1. Clone the repository: `git clone https://github.com/your-username/social-forum-v2.git`
+1. Clone the repository: `git clone https://github.com/ahmed-3rida/it.git`
 2. Open `home/index.html` in any modern web browser.
 3. Enjoy the experience!
 
