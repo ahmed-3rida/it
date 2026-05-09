@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group">
                         <label data-ar="نبذة عني (Bio)" data-en="Bio">نبذة عني (Bio)</label>
-                        <textarea rows="3" data-ar-placeholder="اكتب نبذة عنك..." data-en-placeholder="Write your bio..." placeholder="اكتب نبذة عنك..."></textarea>
+                        <textarea id="editBio" rows="3" data-ar-placeholder="اكتب نبذة عنك..." data-en-placeholder="Write your bio..." placeholder="اكتب نبذة عنك..."></textarea>
                     </div>
                     <button type="submit" class="btn" id="editSubmitBtn" data-ar="حفظ التعديلات" data-en="Save Changes">حفظ التعديلات</button>
                 </form>
@@ -67,16 +67,20 @@
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         let name = localStorage.getItem('username') || 'المستخدم';
+        let bio = localStorage.getItem('userBio') || '';
         document.getElementById('editUsername').value = name;
+        document.getElementById('editBio').value = bio;
         document.getElementById('editAvatar').innerText = name.charAt(0).toUpperCase();
     });
 
     function handleEditSubmit(event) {
         event.preventDefault();
         let nameInput = document.getElementById('editUsername').value.trim();
+        let bioInput = document.getElementById('editBio').value.trim();
         if(nameInput) {
             localStorage.setItem('username', nameInput);
         }
+        localStorage.setItem('userBio', bioInput);
         let btn = document.getElementById('editSubmitBtn');
         let lang = localStorage.getItem('site_lang') || 'ar';
         btn.innerText = lang === 'ar' ? 'جاري الحفظ...' : 'Saving...';

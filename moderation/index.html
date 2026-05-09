@@ -47,14 +47,14 @@
                 
                 <div style="margin-bottom: 30px;">
                     <h3 data-ar="تقديم بلاغ" data-en="Submit a Report">تقديم بلاغ</h3>
-                    <form onsubmit="event.preventDefault(); showToast('Report Sent / تم إرسال البلاغ.', 'success');">
+                    <form onsubmit="submitReport(event, this)">
                         <div class="form-group">
                             <label data-ar="رابط المنشور أو اسم المستخدم" data-en="Post Link or Username">رابط المنشور أو اسم المستخدم</label>
-                            <input type="text" data-ar-placeholder="أدخل الرابط أو الاسم" data-en-placeholder="Enter link or name" placeholder="أدخل الرابط أو الاسم" required>
+                            <input type="text" id="reportTarget" data-ar-placeholder="أدخل الرابط أو الاسم" data-en-placeholder="Enter link or name" placeholder="أدخل الرابط أو الاسم" required>
                         </div>
                         <div class="form-group">
                             <label data-ar="سبب البلاغ" data-en="Reason">سبب البلاغ</label>
-                            <select required>
+                            <select id="reportReason" required>
                                 <option value="" data-ar="اختر سبباً..." data-en="Select reason...">اختر سبباً...</option>
                                 <option value="spam" data-ar="محتوى مزعج (Spam)" data-en="Spam">محتوى مزعج (Spam)</option>
                                 <option value="abuse" data-ar="إساءة أو شتائم" data-en="Abuse">إساءة أو شتائم</option>
@@ -64,6 +64,33 @@
                         <button type="submit" class="btn" data-ar="إرسال البلاغ" data-en="Send Report">إرسال البلاغ</button>
                     </form>
                 </div>
+                <script>
+                function submitReport(e, form) {
+                    e.preventDefault();
+                    let target = document.getElementById('reportTarget').value.trim();
+                    let reasonSelect = document.getElementById('reportReason');
+                    let reasonValue = reasonSelect.value;
+                    let reasonTextAr = reasonSelect.options[reasonSelect.selectedIndex].getAttribute('data-ar');
+                    let reasonTextEn = reasonSelect.options[reasonSelect.selectedIndex].getAttribute('data-en');
+                    
+                    if(!target || !reasonValue) return;
+
+                    let reports = JSON.parse(localStorage.getItem('adminReports') || '[]');
+                    reports.push({
+                        id: Date.now(),
+                        target: target,
+                        reasonAr: reasonTextAr,
+                        reasonEn: reasonTextEn
+                    });
+                    localStorage.setItem('adminReports', JSON.stringify(reports));
+
+                    let lang = localStorage.getItem('site_lang') || 'ar';
+                    showToast(lang === 'ar' ? 'تم إرسال البلاغ بنجاح!' : 'Report sent successfully!', 'success');
+                    
+                    document.getElementById('reportTarget').value = '';
+                    reasonSelect.value = '';
+                }
+                </script>
             
                 <div>
                     <h3 data-ar="قائمة المحظورين" data-en="Blocked Users">قائمة المحظورين</h3>

@@ -90,10 +90,10 @@
                             <a href="../edit_profile/index.html" class="btn btn-secondary" data-ar="تعديل الملف" data-en="Edit Profile">تعديل الملف</a>
                         </div>
                     </div>
-                    <p style="margin:14px 0; color:var(--text-secondary); line-height:1.6;" data-ar="مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع." data-en="Web developer passionate about technology. Love sharing knowledge with the community.">مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع.</p>
+                    <p style="margin:14px 0; color:var(--text-secondary); line-height:1.6;" id="profileBio" data-ar="مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع." data-en="Web developer passionate about technology. Love sharing knowledge with the community.">مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع.</p>
                     <div class="stats-row">
                         <div class="stat-item">
-                            <strong>24</strong>
+                            <strong id="postCountStat">0</strong>
                             <span data-ar="منشور" data-en="Posts">منشور</span>
                         </div>
                         <div class="stat-item">
@@ -111,13 +111,8 @@
             <!-- Recent posts -->
             <div class="container-box">
                 <h3 data-ar="آخر المنشورات" data-en="Recent Posts">آخر المنشورات</h3>
-                <div class="post" style="margin-bottom:0;">
-                    <h4 style="margin:0 0 6px;" data-ar="هل تعلم أن JavaScript تم ابتكارها في 10 أيام؟" data-en="Did you know JavaScript was created in 10 days?">هل تعلم أن JavaScript تم ابتكارها في 10 أيام؟</h4>
-                    <p style="margin:0; color:var(--text-secondary); font-size:14px;" data-ar="تم تصميم اللغة في عام 1995 من قِبل بريندان آيك..." data-en="The language was designed in 1995 by Brendan Eich...">تم تصميم اللغة في عام 1995 من قِبل بريندان آيك...</p>
-                    <div class="post-actions">
-                        <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span class="like-count">42</span></button>
-                        <button class="action-btn">💬 <span>8</span></button>
-                    </div>
+                <div id="recentPostsContainer">
+                    <!-- Posts will load here -->
                 </div>
             </div>
         </main>
@@ -126,10 +121,56 @@
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         let name = localStorage.getItem('username') || 'مستخدم';
+        let bio = localStorage.getItem('userBio');
+        
         document.getElementById('profileName').innerText = name;
         document.getElementById('profileHandle').innerText = '@' + name.toLowerCase().replace(/\s+/g, '_');
         let initial = name.charAt(0).toUpperCase();
         document.getElementById('profileAvatarInitial').innerText = initial || '?';
+        
+        if(bio) {
+            let bioEl = document.getElementById('profileBio');
+            bioEl.innerText = bio;
+            bioEl.removeAttribute('data-ar');
+            bioEl.removeAttribute('data-en');
+        }
+        
+        // Load recent posts
+        let myPosts = JSON.parse(localStorage.getItem('myPosts') || '[]');
+        document.getElementById('postCountStat').innerText = myPosts.length;
+        
+        let recentContainer = document.getElementById('recentPostsContainer');
+        recentContainer.innerHTML = '';
+        
+        let lang = localStorage.getItem('site_lang') || 'ar';
+        
+        if(myPosts.length === 0) {
+            let emptyMsg = document.createElement('p');
+            emptyMsg.style.color = 'var(--text-secondary)';
+            emptyMsg.innerText = lang === 'en' ? 'No posts yet.' : 'لا توجد منشورات حتى الآن.';
+            recentContainer.appendChild(emptyMsg);
+        } else {
+            // Reverse to show newest first, limit to 5
+            let recentPosts = [...myPosts].reverse().slice(0, 5);
+            recentPosts.forEach(p => {
+                let div = document.createElement('div');
+                div.className = 'post';
+                div.style.marginBottom = '15px';
+                
+                let mediaHtml = p.media ? `<img src="${p.media}" style="width:100%; border-radius:10px; max-height:200px; object-fit:cover; margin:10px 0;">` : '';
+                
+                div.innerHTML = `
+                    <h4 style="margin:0 0 6px;">${p.title}</h4>
+                    <p style="margin:0; color:var(--text-secondary); font-size:14px;">${p.content}</p>
+                    ${mediaHtml}
+                `;
+                recentContainer.appendChild(div);
+            });
+        }
+
+        // إخفاء زر المتابعة لأن هذا هو الملف الشخصي للمستخدم
+        let followBtn = document.getElementById('followBtn');
+        if(followBtn) followBtn.style.display = 'none';
     });
 
     function toggleFollowProfile(btn) {

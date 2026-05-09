@@ -57,21 +57,42 @@
                         <label data-ar="إرفاق وسائط (صورة / فيديو)" data-en="Attach Media">إرفاق وسائط (صورة / فيديو)</label>
                         <input type="file" accept="image/*,video/*">
                     </div>
+                    <div class="form-group">
+                        <label data-ar="القسم" data-en="Category">القسم</label>
+                        <select id="postCategory" style="width:100%; padding:10px; border-radius:4px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
+                            <option value="Programming" data-ar="💻 برمجة وتطوير" data-en="💻 Programming">💻 برمجة وتطوير</option>
+                            <option value="Gaming" data-ar="🎮 ألعاب فيديو" data-en="🎮 Gaming">🎮 ألعاب فيديو</option>
+                            <option value="Smartphones" data-ar="📱 هواتف ذكية" data-en="📱 Smartphones">📱 هواتف ذكية</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn" id="postSubmitBtn" data-ar="نشر" data-en="Post">نشر</button>
                 </form>
             </div>
         </main>
     </div>
     <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let select = document.getElementById('postCategory');
+        let saved = JSON.parse(localStorage.getItem('customCategories') || '[]');
+        saved.forEach(cat => {
+            let opt = document.createElement('option');
+            opt.value = cat;
+            opt.innerText = '✨ ' + cat;
+            select.appendChild(opt);
+        });
+    });
+
     function handlePostSubmit(event) {
         event.preventDefault();
 
         let titleInput = event.target.querySelector('input[type="text"]');
         let contentInput = event.target.querySelector('textarea');
         let fileInput = event.target.querySelector('input[type="file"]');
+        let catSelect = document.getElementById('postCategory');
         
         let title = titleInput ? titleInput.value.trim() : '';
         let content = contentInput ? contentInput.value.trim() : '';
+        let category = catSelect ? catSelect.value : '';
         let file = fileInput ? fileInput.files[0] : null;
 
         let btn = document.getElementById('postSubmitBtn');
@@ -82,7 +103,7 @@
         let savePost = (mediaUrl) => {
             if (title && content) {
                 let posts = JSON.parse(localStorage.getItem('myPosts') || '[]');
-                posts.push({ id: Date.now(), title: title, content: content, media: mediaUrl });
+                posts.push({ id: Date.now(), title: title, content: content, media: mediaUrl, category: category });
                 try {
                     localStorage.setItem('myPosts', JSON.stringify(posts));
                 } catch(e) {

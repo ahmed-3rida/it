@@ -46,20 +46,19 @@
                 <h2 class="accent-title" data-ar="المحادثات المباشرة" data-en="Live Chat">المحادثات المباشرة</h2>
                 <div style="display: flex; height: 400px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
                     <!-- جهات الاتصال -->
-                    <div style="width: 30%; border-left: 1px solid var(--border-color); background: var(--bg-color); overflow-y: auto;">
-                        <div style="padding: 15px; border-bottom: 1px solid var(--border-color); cursor: pointer; background: var(--hover-bg);">
+                    <div id="contactList" style="width: 30%; border-left: 1px solid var(--border-color); background: var(--bg-color); overflow-y: auto;">
+                        <div class="chat-contact active" onclick="switchChat('Ahmed Mohamed', this)" style="padding: 15px; border-bottom: 1px solid var(--border-color); cursor: pointer; background: var(--hover-bg);">
                             <strong data-ar="أحمد محمد" data-en="Ahmed Mohamed">أحمد محمد</strong>
                         </div>
-                        <div style="padding: 15px; border-bottom: 1px solid var(--border-color); cursor: pointer;">
+                        <div class="chat-contact" onclick="switchChat('Sara Ali', this)" style="padding: 15px; border-bottom: 1px solid var(--border-color); cursor: pointer;">
                             <strong data-ar="سارة علي" data-en="Sara Ali">سارة علي</strong>
                         </div>
                     </div>
                     <!-- نافذة المحادثة -->
                     <div style="width: 70%; display: flex; flex-direction: column; background: var(--card-bg);">
-                        <div style="padding: 15px; border-bottom: 1px solid var(--border-color); font-weight: bold;" data-ar="أحمد محمد" data-en="Ahmed Mohamed">أحمد محمد</div>
+                        <div id="activeChatTitle" style="padding: 15px; border-bottom: 1px solid var(--border-color); font-weight: bold;" data-ar="أحمد محمد" data-en="Ahmed Mohamed">أحمد محمد</div>
                         <div id="chatMessages" style="flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
-                            <div style="align-self: flex-start; background: var(--hover-bg); padding: 10px 15px; border-radius: 15px;" data-ar="مرحباً، كيف حالك؟" data-en="Hello, how are you?">مرحباً، كيف حالك؟</div>
-                            <div style="align-self: flex-end; background: var(--accent); color: white; padding: 10px 15px; border-radius: 15px;" data-ar="أهلاً بك، أنا بخير!" data-en="Hi, I am fine!">أهلاً بك، أنا بخير!</div>
+                            <!-- الرسائل تظهر هنا -->
                         </div>
                         <div style="padding: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px;">
                             <input type="text" id="msgInput" data-ar-placeholder="اكتب رسالة..." data-en-placeholder="Type a message..." placeholder="اكتب رسالة..." style="flex-grow: 1; padding: 10px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary);">
@@ -69,14 +68,112 @@
                 </div>
             </div>
             <script>
+            let currentChat = 'Ahmed Mohamed';
+
+            document.addEventListener("DOMContentLoaded", function() {
+                loadChatMessages(currentChat);
+                
+                // Allow hitting Enter to send
+                document.getElementById('msgInput').addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') sendMessage();
+                });
+            });
+
+            function switchChat(chatId, element) {
+                currentChat = chatId;
+                
+                // Update active class on contacts
+                document.querySelectorAll('.chat-contact').forEach(el => {
+                    el.style.background = '';
+                });
+                element.style.background = 'var(--hover-bg)';
+                
+                // Update title
+                let titleEl = document.getElementById('activeChatTitle');
+                let isAr = (localStorage.getItem('site_lang') || 'ar') === 'ar';
+                if(chatId === 'Ahmed Mohamed') {
+                    titleEl.setAttribute('data-ar', 'أحمد محمد');
+                    titleEl.setAttribute('data-en', 'Ahmed Mohamed');
+                    titleEl.innerText = isAr ? 'أحمد محمد' : 'Ahmed Mohamed';
+                } else if(chatId === 'Sara Ali') {
+                    titleEl.setAttribute('data-ar', 'سارة علي');
+                    titleEl.setAttribute('data-en', 'Sara Ali');
+                    titleEl.innerText = isAr ? 'سارة علي' : 'Sara Ali';
+                }
+                
+                // Load messages for this chat
+                loadChatMessages(chatId);
+            }
+
+            function loadChatMessages(chatId) {
+                let messagesContainer = document.getElementById('chatMessages');
+                messagesContainer.innerHTML = ''; // Clear current messages
+                
+                let saved = JSON.parse(localStorage.getItem('chat_' + chatId) || '[]');
+                
+                // Default messages if empty
+                if(saved.length === 0) {
+                    if(chatId === 'Ahmed Mohamed') {
+                        saved = [
+                            { sender: 'other', text: 'مرحباً، كيف حالك؟', textEn: 'Hello, how are you?' },
+                            { sender: 'me', text: 'أهلاً بك، أنا بخير!', textEn: 'Hi, I am fine!' }
+                        ];
+                    } else {
+                        saved = [
+                            { sender: 'other', text: 'أهلاً، هل رأيت منشوري الأخير؟', textEn: 'Hi, did you see my last post?' }
+                        ];
+                    }
+                    localStorage.setItem('chat_' + chatId, JSON.stringify(saved));
+                }
+
+                let lang = localStorage.getItem('site_lang') || 'ar';
+
+                saved.forEach(msg => {
+                    let div = document.createElement('div');
+                    let isMe = msg.sender === 'me';
+                    
+                    div.style.alignSelf = isMe ? 'flex-end' : 'flex-start';
+                    div.style.background = isMe ? 'var(--accent)' : 'var(--hover-bg)';
+                    div.style.color = isMe ? 'white' : 'var(--text-primary)';
+                    div.style.padding = '10px 15px';
+                    div.style.borderRadius = '15px';
+                    
+                    // Fallback to msg.text if textEn is not available, or display text directly if it's just a string (old format)
+                    if(typeof msg === 'string') {
+                        div.innerText = msg;
+                    } else {
+                        div.innerText = (lang === 'en' && msg.textEn) ? msg.textEn : msg.text;
+                    }
+                    
+                    messagesContainer.appendChild(div);
+                });
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
             function sendMessage() {
                 let input = document.getElementById('msgInput');
-                if(input.value.trim() === '') return;
+                let text = input.value.trim();
+                if(text === '') return;
+                
                 let messages = document.getElementById('chatMessages');
                 let div = document.createElement('div');
-                div.style = 'align-self: flex-end; background: var(--accent); color: white; padding: 10px 15px; border-radius: 15px;';
-                div.innerText = input.value;
+                div.style.alignSelf = 'flex-end';
+                div.style.background = 'var(--accent)';
+                div.style.color = 'white';
+                div.style.padding = '10px 15px';
+                div.style.borderRadius = '15px';
+                div.innerText = text;
                 messages.appendChild(div);
+                
+                // Save
+                let saved = JSON.parse(localStorage.getItem('chat_' + currentChat) || '[]');
+                // Convert old string arrays to objects if needed
+                if(saved.length > 0 && typeof saved[0] === 'string') {
+                    saved = saved.map(s => ({sender: 'me', text: s, textEn: s}));
+                }
+                saved.push({ sender: 'me', text: text, textEn: text });
+                localStorage.setItem('chat_' + currentChat, JSON.stringify(saved));
+                
                 input.value = '';
                 messages.scrollTop = messages.scrollHeight;
             }

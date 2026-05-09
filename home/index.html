@@ -155,6 +155,23 @@
         let mainContent = document.querySelector('.main-content');
         let welcomeBar = document.querySelector('.container-box');
         
+        let urlParams = new URLSearchParams(window.location.search);
+        let currentCategory = urlParams.get('category');
+        
+        // Hide static posts if viewing a specific category
+        if (currentCategory) {
+            document.querySelectorAll('.post').forEach(p => p.style.display = 'none');
+            // Show a header indicating the category
+            let catHeader = document.createElement('h2');
+            catHeader.className = 'accent-title';
+            catHeader.style.marginBottom = '20px';
+            catHeader.innerText = 'القسم: ' + currentCategory;
+            welcomeBar.insertAdjacentElement('afterend', catHeader);
+            welcomeBar = catHeader; // Insert dynamic posts after this header
+            
+            myPosts = myPosts.filter(p => p.category === currentCategory);
+        }
+        
         myPosts.forEach(post => {
             let div = document.createElement('div');
             div.className = 'post';
