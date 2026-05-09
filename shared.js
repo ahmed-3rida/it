@@ -29,21 +29,23 @@ function applyLanguage(lang) {
         document.documentElement.dir = 'rtl';
     }
 
+    // ترجمة النصوص العادية
     document.querySelectorAll('[data-ar]').forEach(el => {
-        if(lang === 'en' && el.getAttribute('data-en')) {
-            el.innerText = el.getAttribute('data-en');
-        } else if(el.getAttribute('data-ar')) {
-            el.innerText = el.getAttribute('data-ar');
-        }
+        let text = (lang === 'en' && el.getAttribute('data-en')) ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+        if (text) el.innerText = text;
     });
 
+    // ترجمة الـ Placeholders
     document.querySelectorAll('[data-ar-placeholder]').forEach(el => {
-        if(lang === 'en' && el.getAttribute('data-en-placeholder')) {
-            el.placeholder = el.getAttribute('data-en-placeholder');
-        } else if(el.getAttribute('data-ar-placeholder')) {
-            el.placeholder = el.getAttribute('data-ar-placeholder');
-        }
+        let ph = (lang === 'en' && el.getAttribute('data-en-placeholder')) ? el.getAttribute('data-en-placeholder') : el.getAttribute('data-ar-placeholder');
+        if (ph) el.placeholder = ph;
     });
+
+    // ترجمة عنوان الصفحة (Title)
+    let titleEl = document.querySelector('title[data-ar]');
+    if (titleEl) {
+        document.title = (lang === 'en' && titleEl.getAttribute('data-en')) ? titleEl.getAttribute('data-en') : titleEl.getAttribute('data-ar');
+    }
 }
 
 // ===== Auth في الـ Navbar =====

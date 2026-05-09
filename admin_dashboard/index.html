@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniSkills Social</title>
+    <title data-ar="UniSkills Social - لوحة الإدارة" data-en="UniSkills Social - Admin Dashboard">UniSkills Social - لوحة الإدارة</title>
     <link rel="icon" type="image/x-icon" href="../images/uniskills-logo.ico">
     <link rel="stylesheet" href="../shared.css">
     <link rel="stylesheet" href="style.css">
@@ -59,7 +59,7 @@
             <h2 class="accent-title" data-ar="لوحة الإدارة" data-en="Admin Dashboard">لوحة الإدارة</h2>
 
             <div class="container-box">
-                <h3 data-ar="Overview (نظرة عامة)" data-en="Overview">Overview (نظرة عامة)</h3>
+                <h3 data-ar="نظرة عامة" data-en="Overview">نظرة عامة</h3>
                 <div style="display:flex; gap:20px;">
                     <div
                         style="flex:1; background:var(--bg-color); padding:20px; border-radius:8px; text-align:center; border:1px solid var(--border-color);">
@@ -75,8 +75,7 @@
             </div>
 
             <div class="container-box">
-                <h3 data-ar="Manage Users (إدارة المستخدمين)" data-en="Manage Users">Manage Users (إدارة المستخدمين)
-                </h3>
+                <h3 data-ar="إدارة المستخدمين" data-en="Manage Users">إدارة المستخدمين</h3>
                 <table style="width:100%; border-collapse:collapse; text-align:right;">
                     <tr style="background:var(--bg-color);">
                         <th style="padding:10px; border:1px solid var(--border-color);" data-ar="الاسم" data-en="Name">
@@ -88,37 +87,37 @@
                         <td style="padding:10px; border:1px solid var(--border-color);">أحمد محمد</td>
                         <td style="padding:10px; border:1px solid var(--border-color);">
                             <button class="btn btn-secondary" style="padding:5px;"
-                                onclick="this.closest('tr').remove(); document.getElementById('totalUsers').innerText='1,249'; showToast('User Banned / تم حظر المستخدم', 'success');">حظر
-                                (Ban)</button>
+                                data-ar="حظر" data-en="Ban"
+                                onclick="this.closest('tr').remove(); document.getElementById('totalUsers').innerText='1,249'; showToast(localStorage.getItem('site_lang')==='en'?'User Banned':'تم حظر المستخدم', 'success');">حظر</button>
                         </td>
                     </tr>
                     <tr>
                         <td style="padding:10px; border:1px solid var(--border-color);">مستخدم مزعج</td>
                         <td style="padding:10px; border:1px solid var(--border-color);">
                             <button class="btn btn-secondary" style="padding:5px;"
-                                onclick="this.closest('tr').remove(); showToast('User Banned / تم حظر المستخدم', 'success');">حظر
-                                (Ban)</button>
+                                data-ar="حظر" data-en="Ban"
+                                onclick="this.closest('tr').remove(); showToast(localStorage.getItem('site_lang')==='en'?'User Banned':'تم حظر المستخدم', 'success');">حظر</button>
                         </td>
                     </tr>
                 </table>
             </div>
 
             <div class="container-box">
-                <h3 data-ar="Manage Posts (إدارة المنشورات)" data-en="Manage Posts">Manage Posts (إدارة المنشورات)</h3>
+                <h3 data-ar="إدارة المنشورات" data-en="Manage Posts">إدارة المنشورات</h3>
                 <ul id="adminPostsList" style="list-style:none; padding:0;">
                     <!-- Posts will load here -->
                 </ul>
             </div>
 
             <div class="container-box">
-                <h3 data-ar="Reports (البلاغات)" data-en="Reports">Reports (البلاغات)</h3>
+                <h3 data-ar="البلاغات" data-en="Reports">البلاغات</h3>
                 <ul id="adminReportsList" style="list-style:none; padding:0;">
                     <!-- Reports will load here -->
                 </ul>
             </div>
 
             <div class="container-box">
-                <h3 data-ar="Manage Ads (إدارة الإعلانات)" data-en="Manage Ads">Manage Ads (إدارة الإعلانات)</h3>
+                <h3 data-ar="إدارة الإعلانات" data-en="Manage Ads">إدارة الإعلانات</h3>
                 <ul id="adminAdsList" style="list-style:none; padding:0;">
                     <!-- Ads will load here -->
                 </ul>
@@ -131,4 +130,3 @@
 </body>
 
 </html>
-
