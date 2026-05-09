@@ -5,68 +5,127 @@
             avatarEl.innerText = name.charAt(0).toUpperCase();
         }
 
-        // Load user posts
-        let myPosts = JSON.parse(localStorage.getItem('myPosts') || '[]');
-        let mainContent = document.querySelector('.main-content');
-        let welcomeBar = document.querySelector('.container-box');
+        // Load and combine posts and polls
+        let myPosts = JSON.parse(localStorage.getItem('myPosts') || '[]').map(p => ({...p, type: 'post'}));
+        let customPolls = JSON.parse(localStorage.getItem('customPolls') || '[]').map(p => ({...p, type: 'poll'}));
         
+        let combinedFeed = [...myPosts, ...customPolls];
+        
+        // Sort by ID descending (newest first)
+        combinedFeed.sort((a, b) => (b.id || 0) - (a.id || 0));
+        
+        let welcomeBar = document.querySelector('.container-box');
         let urlParams = new URLSearchParams(window.location.search);
         let currentCategory = urlParams.get('category');
-        
-        // Hide static posts if viewing a specific category
         if (currentCategory) {
-            document.querySelectorAll('.post').forEach(p => p.style.display = 'none');
-            // Show a header indicating the category
             let catHeader = document.createElement('h2');
             catHeader.className = 'accent-title';
             catHeader.style.marginBottom = '20px';
-            catHeader.innerText = 'القسم: ' + currentCategory;
+            catHeader.innerText = (localStorage.getItem('site_lang') === 'en' ? 'Category: ' : 'القسم: ') + currentCategory;
             welcomeBar.insertAdjacentElement('afterend', catHeader);
-            welcomeBar = catHeader; // Insert dynamic posts after this header
+            welcomeBar = catHeader;
             
-            myPosts = myPosts.filter(p => p.category === currentCategory);
+            combinedFeed = combinedFeed.filter(item => item.category === currentCategory);
         }
         
-        myPosts.forEach(post => {
+        let lang = localStorage.getItem('site_lang') || 'ar';
+        let voteText = lang === 'en' ? 'Vote' : 'تصويت';
+        let resText = lang === 'en' ? 'Results:' : 'النتائج:';
+
+        // Use a container or insert in reverse to keep newest at top
+        // Let's iterate in reverse (Oldest to Newest) so 'afterend' puts Newest at the top
+        [...combinedFeed].reverse().forEach(item => {
             let div = document.createElement('div');
             div.className = 'post';
-            div.setAttribute('data-post-id', post.id);
-            let timeText = localStorage.getItem('site_lang') === 'en' ? 'Just now' : 'الآن';
             
-            // Use post.author if available, else current logged in user, else "زائر" (Visitor)
-            let defaultName = localStorage.getItem('site_lang') === 'en' ? 'Visitor' : 'زائر';
-            let uName = post.author || name || defaultName;
-            let firstLetter = uName.charAt(0).toUpperCase();
-            
-            div.innerHTML = `
-                <div class="post-header">
-                    <div class="left">
-                        <div class="avatar" style="background:var(--accent);">${firstLetter}</div>
-                        <div>
-                            <div class="username">${uName}</div>
-                            <div class="time">${timeText}</div>
+            if (item.type === 'post') {
+                div.setAttribute('data-post-id', item.id);
+                let timeText = timeAgo(item.id);
+                let defaultName = lang === 'en' ? 'Visitor' : 'زائر';
+                let uName = item.author || name || defaultName;
+                let firstLetter = uName.charAt(0).toUpperCase();
+                
+                div.innerHTML = `
+                    <div class="post-header">
+                        <div class="left">
+                            <div class="avatar" style="background:var(--accent);">${firstLetter}</div>
+                            <div>
+                                <div class="username">${uName}</div>
+                                <div class="time">${timeText}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <h2 class="accent-title" style="font-size:18px; margin-bottom:8px;">${post.title}</h2>
-                <p style="color:var(--text-secondary); line-height:1.7; margin:0;">${post.content}</p>
-                ${post.media ? `<img src="${post.media}" style="width:100%; border-radius:10px; max-height:400px; object-fit:cover; margin-top:10px;">` : ''}
-                <div class="post-actions">
-                    <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span>${localStorage.getItem('site_lang') === 'en' ? 'Like' : 'أعجبني'}</span> (<span class="like-count">0</span>)</button>
-                    <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span>${localStorage.getItem('site_lang') === 'en' ? 'Comment' : 'تعليق'}</span> (<span class="comment-count">0</span>)</button>
-                    <button class="action-btn" onclick="toggleSaveGlobal(this)">🔖 <span>${localStorage.getItem('site_lang') === 'en' ? 'Save' : 'حفظ'}</span></button>
-                </div>
-                <div class="comment-section" style="display:none;">
-                    <div class="comment-input-row">
-                        <input type="text" placeholder="${localStorage.getItem('site_lang') === 'en' ? 'Add a comment...' : 'أضف تعليقاً...'}" style="flex:1; padding:10px 14px; border-radius:50px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);" onkeydown="if(event.key==='Enter') addInlineComment(this.nextElementSibling)">
-                        <button class="btn" style="border-radius:50px; padding:10px 18px;" onclick="addInlineComment(this)">${localStorage.getItem('site_lang') === 'en' ? 'Add' : 'إضافة'}</button>
+                    <h2 class="accent-title" style="font-size:18px; margin-bottom:8px;">${item.title}</h2>
+                    <p style="color:var(--text-secondary); line-height:1.7; margin:0;">${item.content}</p>
+                    ${item.media ? `<img src="${item.media}" style="width:100%; border-radius:10px; max-height:400px; object-fit:cover; margin-top:10px;">` : ''}
+                    <div class="post-actions">
+                        <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span>${lang === 'en' ? 'Like' : 'أعجبني'}</span> (<span class="like-count">0</span>)</button>
+                        <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span>${lang === 'en' ? 'Comment' : 'تعليق'}</span> (<span class="comment-count">0</span>)</button>
+                        <button class="action-btn" onclick="toggleSaveGlobal(this)">🔖 <span>${lang === 'en' ? 'Save' : 'حفظ'}</span></button>
                     </div>
-                    <div class="comments-list"></div>
-                </div>
-            `;
+                    <div class="comment-section" style="display:none;">
+                        <div class="comment-input-row">
+                            <input type="text" placeholder="${lang === 'en' ? 'Add a comment...' : 'أضف تعليقاً...'}" style="flex:1; padding:10px 14px; border-radius:50px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);" onkeydown="if(event.key==='Enter') addInlineComment(this.nextElementSibling)">
+                            <button class="btn" style="border-radius:50px; padding:10px 18px;" onclick="addInlineComment(this)">${lang === 'en' ? 'Add' : 'إضافة'}</button>
+                        </div>
+                        <div class="comments-list"></div>
+                    </div>
+                `;
+            } else {
+                // Poll rendering
+                let totalVotes = item.options.reduce((sum, opt) => sum + opt.votes, 0);
+                let hasVoted = localStorage.getItem('voted_' + item.id) === 'true';
+                let timeText = timeAgo(item.id);
+                let formHtml = '';
+                let resultsHtml = '';
+
+                item.options.forEach((opt, idx) => {
+                    let perc = totalVotes === 0 ? 0 : Math.round((opt.votes / totalVotes) * 100);
+                    formHtml += `<div style="margin-bottom: 10px;"><label><input type="radio" name="home_poll_${item.id}" value="${idx}" required> ${opt.text}</label></div>`;
+                    resultsHtml += `<div style="margin-bottom: 10px;">${opt.text} (${perc}%) - ${opt.votes} votes <div style="background: var(--bg-color); height: 10px; border-radius: 5px;"><div style="background: var(--accent); height: 10px; border-radius: 5px; width: ${perc}%; transition: width 0.3s;"></div></div></div>`;
+                });
+
+                div.innerHTML = `
+                    <div class="post-header">
+                        <div class="left">
+                            <div class="avatar" style="background:var(--accent);">📊</div>
+                            <div>
+                                <div class="username">${lang === 'en' ? 'Active Poll' : 'استطلاع رأي نشط'}</div>
+                                <div class="time">${timeText}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 style="margin-bottom:15px; color:var(--text-primary); font-size:18px;">${item.question}</h3>
+                    <form onsubmit="handleHomeVote(event, ${item.id})" style="${hasVoted ? 'display:none;' : ''}">
+                        ${formHtml}
+                        <button type="submit" class="btn" style="margin-top:10px;">${voteText}</button>
+                    </form>
+                    <div id="home_res_${item.id}" style="${hasVoted ? 'display:block;' : 'display:none;'} margin-top:20px;">
+                        <h4 style="color:var(--text-secondary); margin-bottom:10px;">${resText}</h4>
+                        ${resultsHtml}
+                    </div>
+                `;
+            }
             welcomeBar.insertAdjacentElement('afterend', div);
         });
     });
+
+    function handleHomeVote(e, pollId) {
+        e.preventDefault();
+        let selectedInput = e.target.querySelector(`input[name="home_poll_${pollId}"]:checked`);
+        if (!selectedInput) return;
+        
+        let selectedIdx = selectedInput.value;
+        let saved = JSON.parse(localStorage.getItem('customPolls') || '[]');
+        let poll = saved.find(p => p.id === pollId);
+        
+        if(poll) {
+            poll.options[parseInt(selectedIdx)].votes += 1;
+            localStorage.setItem('customPolls', JSON.stringify(saved));
+            localStorage.setItem('voted_' + pollId, 'true');
+            window.location.reload();
+        }
+    }
 
     function handleSave(btn) {
         let lang = localStorage.getItem('site_lang') || 'ar';

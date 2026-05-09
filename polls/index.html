@@ -70,22 +70,6 @@
             <div class="container-box" id="pollsList">
                 <h2 class="accent-title" data-ar="الاستطلاعات الجارية" data-en="Active Polls">الاستطلاعات الجارية</h2>
                 
-                <div class="post">
-                    <h3 data-ar="ما هو نظام التشغيل المفضل لديك؟" data-en="What is your favorite OS?">ما هو نظام التشغيل المفضل لديك؟</h3>
-                    <form onsubmit="event.preventDefault(); document.getElementById('pollResults').style.display='block'; this.style.display='none';">
-                        <div style="margin-bottom: 10px;"><label><input type="radio" name="os" required> Windows</label></div>
-                        <div style="margin-bottom: 10px;"><label><input type="radio" name="os"> Linux</label></div>
-                        <div style="margin-bottom: 10px;"><label><input type="radio" name="os"> macOS</label></div>
-                        <button type="submit" class="btn" style="margin-top:10px;" data-ar="تصويت" data-en="Vote">تصويت</button>
-                    </form>
-                    
-                    <div id="pollResults" style="display:none; margin-top:20px;">
-                        <h4 data-ar="النتائج:" data-en="Results:">النتائج:</h4>
-                        <div style="margin-bottom: 10px;">Windows (60%) <div style="background: var(--bg-color); height: 10px; border-radius: 5px;"><div style="background: var(--accent); height: 10px; border-radius: 5px; width: 60%;"></div></div></div>
-                        <div style="margin-bottom: 10px;">Linux (30%) <div style="background: var(--bg-color); height: 10px; border-radius: 5px;"><div style="background: var(--accent); height: 10px; border-radius: 5px; width: 30%;"></div></div></div>
-                        <div style="margin-bottom: 10px;">macOS (10%) <div style="background: var(--bg-color); height: 10px; border-radius: 5px;"><div style="background: var(--accent); height: 10px; border-radius: 5px; width: 10%;"></div></div></div>
-                    </div>
-                </div>
             </div>
             
         </main>

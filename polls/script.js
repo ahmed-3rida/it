@@ -11,13 +11,14 @@ document.addEventListener("DOMContentLoaded", function() {
             function loadPolls() {
                 let saved = JSON.parse(localStorage.getItem('customPolls') || '[]');
                 let container = document.getElementById('pollsList');
-                // clear old custom ones (keep the h2 and the first static one)
+                // clear old custom ones
                 let customPosts = container.querySelectorAll('.custom-poll');
                 customPosts.forEach(p => p.remove());
 
                 let lang = localStorage.getItem('site_lang') || 'ar';
                 let voteText = lang === 'en' ? 'Vote' : 'تصويت';
                 let resText = lang === 'en' ? 'Results:' : 'النتائج:';
+                let deleteText = lang === 'en' ? 'Delete' : 'حذف';
 
                 saved.forEach(poll => {
                     let div = document.createElement('div');
@@ -36,7 +37,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     });
 
                     div.innerHTML = `
-                        <h3>${poll.question}</h3>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;">
+                            <h3 style="margin:0;">${poll.question}</h3>
+                            <button class="btn" style="background:rgba(231,76,60,0.1); color:#ef4444; padding:5px 12px; font-size:12px; border:1px solid rgba(231,76,60,0.2);" onclick="deletePoll(${poll.id})">${deleteText}</button>
+                        </div>
                         <form id="form_${poll.id}" onsubmit="handleVote(event, ${poll.id})" style="${hasVoted ? 'display:none;' : ''}">
                             ${formHtml}
                             <button type="submit" class="btn" style="margin-top:10px;">${voteText}</button>
@@ -48,6 +52,21 @@ document.addEventListener("DOMContentLoaded", function() {
                     `;
                     container.querySelector('h2').insertAdjacentElement('afterend', div);
                 });
+            }
+
+            function deletePoll(pollId) {
+                let lang = localStorage.getItem('site_lang') || 'ar';
+                if(!confirm(lang === 'ar' ? 'هل أنت متأكد من حذف هذا الاستطلاع؟' : 'Are you sure you want to delete this poll?')) return;
+                
+                let saved = JSON.parse(localStorage.getItem('customPolls') || '[]');
+                saved = saved.filter(p => p.id !== pollId);
+                localStorage.setItem('customPolls', JSON.stringify(saved));
+                
+                // Also remove vote status
+                localStorage.removeItem('voted_' + pollId);
+                
+                showToast(lang === 'ar' ? 'تم حذف الاستطلاع' : 'Poll deleted', 'info');
+                loadPolls();
             }
 
             function handleVote(e, pollId) {

@@ -147,6 +147,43 @@ function showToast(message, type='success') {
     }, 3000);
 }
 
+// ===== حساب الوقت المنقضي (Time Ago) =====
+function timeAgo(timestamp) {
+    if (!timestamp) return '';
+    let lang = localStorage.getItem('site_lang') || 'ar';
+    let now = Date.now();
+    let seconds = Math.floor((now - timestamp) / 1000);
+    
+    if (seconds < 60) return lang === 'en' ? 'Just now' : 'الآن';
+    
+    let intervals = {
+        year: 31536000,
+        month: 2592000,
+        week: 604800,
+        day: 86400,
+        hour: 3600,
+        minute: 60
+    };
+    
+    let labels = {
+        ar: { year: 'سنة', month: 'شهر', week: 'أسبوع', day: 'يوم', hour: 'ساعة', minute: 'دقيقة', ago: 'منذ' },
+        en: { year: 'year', month: 'month', week: 'week', day: 'day', hour: 'hour', minute: 'minute', ago: 'ago' }
+    };
+    
+    for (let key in intervals) {
+        let count = Math.floor(seconds / intervals[key]);
+        if (count >= 1) {
+            let label = labels[lang][key];
+            if (lang === 'en') {
+                return `${count} ${label}${count > 1 ? 's' : ''} ${labels[lang].ago}`;
+            } else {
+                return `${labels[lang].ago} ${count} ${label}`;
+            }
+        }
+    }
+    return lang === 'en' ? 'Just now' : 'الآن';
+}
+
 // ===== CSS Animation (inject once) =====
 if(!document.getElementById('shared-anim-style')) {
     let style = document.createElement('style');

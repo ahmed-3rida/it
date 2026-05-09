@@ -94,74 +94,7 @@
         </main>
     </div>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let name = localStorage.getItem('username') || 'مستخدم';
-        let bio = localStorage.getItem('userBio');
-        
-        document.getElementById('profileName').innerText = name;
-        document.getElementById('profileHandle').innerText = '@' + name.toLowerCase().replace(/\s+/g, '_');
-        let initial = name.charAt(0).toUpperCase();
-        document.getElementById('profileAvatarInitial').innerText = initial || '?';
-        
-        if(bio) {
-            let bioEl = document.getElementById('profileBio');
-            bioEl.innerText = bio;
-            bioEl.removeAttribute('data-ar');
-            bioEl.removeAttribute('data-en');
-        }
-        
-        // Load recent posts
-        let myPosts = JSON.parse(localStorage.getItem('myPosts') || '[]');
-        document.getElementById('postCountStat').innerText = myPosts.length;
-        
-        let recentContainer = document.getElementById('recentPostsContainer');
-        recentContainer.innerHTML = '';
-        
-        let lang = localStorage.getItem('site_lang') || 'ar';
-        
-        if(myPosts.length === 0) {
-            let emptyMsg = document.createElement('p');
-            emptyMsg.style.color = 'var(--text-secondary)';
-            emptyMsg.innerText = lang === 'en' ? 'No posts yet.' : 'لا توجد منشورات حتى الآن.';
-            recentContainer.appendChild(emptyMsg);
-        } else {
-            // Reverse to show newest first, limit to 5
-            let recentPosts = [...myPosts].reverse().slice(0, 5);
-            recentPosts.forEach(p => {
-                let div = document.createElement('div');
-                div.className = 'post';
-                div.style.marginBottom = '15px';
-                
-                let mediaHtml = p.media ? `<img src="${p.media}" style="width:100%; border-radius:10px; max-height:200px; object-fit:cover; margin:10px 0;">` : '';
-                
-                div.innerHTML = `
-                    <h4 style="margin:0 0 6px;">${p.title}</h4>
-                    <p style="margin:0; color:var(--text-secondary); font-size:14px;">${p.content}</p>
-                    ${mediaHtml}
-                `;
-                recentContainer.appendChild(div);
-            });
-        }
 
-        // إخفاء زر المتابعة لأن هذا هو الملف الشخصي للمستخدم
-        let followBtn = document.getElementById('followBtn');
-        if(followBtn) followBtn.style.display = 'none';
-    });
-
-    function toggleFollowProfile(btn) {
-        let lang = localStorage.getItem('site_lang') || 'ar';
-        let followText = lang === 'ar' ? '+ متابعة' : '+ Follow';
-        let unfollowText = lang === 'ar' ? 'إلغاء المتابعة' : 'Unfollow';
-        if(btn.innerText.trim() === followText) {
-            btn.innerText = unfollowText; btn.className = 'btn btn-secondary';
-            showToast(lang === 'ar' ? 'تمت المتابعة!' : 'Followed!', 'success');
-        } else {
-            btn.innerText = followText; btn.className = 'btn';
-            showToast(lang === 'ar' ? 'تم إلغاء المتابعة' : 'Unfollowed', 'info');
-        }
-    }
-    </script>
     <script src="../shared.js"></script>
     <script src="script.js"></script>
 </body>
