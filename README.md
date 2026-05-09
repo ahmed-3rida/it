@@ -73,20 +73,20 @@ This project is the result of a collaborative effort by a dedicated team of 6 de
 - **Security**: Granular privacy controls and account settings (`privacy_settings`).
 
 #### **Youssef Safwat Arnest**
-*Interactive Engagement*
+*Interactive Engagement & Style*
+- **Core Design**: Global design system, tokens, and animations (`shared.css`).
 - **Polls Engine**: Voting logic, result calculation, and poll creation (`polls`).
 - **Real-time Chat**: Private messaging interface and message handling (`chat`).
 
 #### **Youssef Mohamed Mohamed**
-*Content Generation*
+*Content Generation & Analytics*
 - **Feed Content**: Advanced post creation with media support (`create_post`).
 - **Discussions**: Thread management and hierarchical comment logic (`create_thread`).
+- **User Insights**: Personal dashboard for tracking user activity (`user_dashboard`).
 
 #### **Mostafa Taher Helmy**
-*Operations & Core Design*
-- **Core Design**: Global design system, tokens, and animations (`shared.css`).
+*Operations & Identity*
 - **Admin Panel**: Global platform management and metrics (`admin_dashboard`).
-- **User Insights**: Personal dashboard for tracking user activity (`user_dashboard`).
 - **Governance**: Content moderation and reporting tools (`moderation`).
 - **User Identity**: Public profile rendering and profile editing (`profile`, `edit_profile`).
 
