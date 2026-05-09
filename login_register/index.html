@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Forum</title>
     <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="navbar">
@@ -27,8 +28,8 @@
                     <button id="tab-register" class="btn" style="flex:1; border-radius:0; background:none; color:var(--text-secondary);" onclick="showTab('register')" data-ar="إنشاء حساب" data-en="Register">إنشاء حساب</button>
                 </div>
                 
-                <form id="form-login" onsubmit="event.preventDefault(); doLogin('user');">
-                    <div class="form-group"><label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label><input type="email" required></div>
+                <form id="form-login" onsubmit="event.preventDefault(); doLogin(document.getElementById('login_email').value.split('@')[0]);">
+                    <div class="form-group"><label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label><input type="email" id="login_email" required></div>
                     <div class="form-group"><label data-ar="كلمة المرور" data-en="Password">كلمة المرور</label><input type="password" required></div>
                     <button type="submit" class="btn" style="width:100%;" data-ar="دخول" data-en="Login">دخول</button>
                 </form>
@@ -39,36 +40,11 @@
                     <div class="form-group"><label data-ar="كلمة المرور" data-en="Password">كلمة المرور</label><input type="password" required></div>
                     <button type="submit" class="btn" style="width:100%;" data-ar="إنشاء حساب" data-en="Register">إنشاء حساب</button>
                 </form>
-                
-                <script>
-                function showTab(tab) {
-                    if(tab === 'login') {
-                        document.getElementById('form-login').style.display = 'block';
-                        document.getElementById('form-register').style.display = 'none';
-                        document.getElementById('tab-login').style.color = 'var(--accent)';
-                        document.getElementById('tab-login').style.borderBottom = '2px solid var(--accent)';
-                        document.getElementById('tab-register').style.color = 'var(--text-secondary)';
-                        document.getElementById('tab-register').style.borderBottom = 'none';
-                    } else {
-                        document.getElementById('form-login').style.display = 'none';
-                        document.getElementById('form-register').style.display = 'block';
-                        document.getElementById('tab-register').style.color = 'var(--accent)';
-                        document.getElementById('tab-register').style.borderBottom = '2px solid var(--accent)';
-                        document.getElementById('tab-login').style.color = 'var(--text-secondary)';
-                        document.getElementById('tab-login').style.borderBottom = 'none';
-                    }
-                }
-                
-                function doLogin(username) {
-                    // حفظ حالة تسجيل الدخول واسم المستخدم
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('username', username === 'user' ? 'زائر' : username);
-                    window.location.href = '../home/index.html';
-                }
-                </script>
+
             </div>
         </main>
     </div>
     <script src="../shared.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

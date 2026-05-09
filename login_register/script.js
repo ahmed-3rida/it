@@ -1,21 +1,24 @@
-// وظيفة للتبديل بين تسجيل الدخول وإنشاء حساب
-function showTab(tabName) {
-    // إخفاء كل النماذج
-    document.getElementById('login-form').classList.add('hidden');
-    document.getElementById('register-form').classList.add('hidden');
-
-    // إزالة اللون من الأزرار
-    let tabs = document.querySelectorAll('.tab-btn');
-    tabs.forEach(tab => {
-        tab.classList.remove('active');
-    });
-
-    // إظهار النموذج المطلوب وتفعيل زره
-    if (tabName === 'login') {
-        document.getElementById('login-form').classList.remove('hidden');
-        tabs[0].classList.add('active');
-    } else if (tabName === 'register') {
-        document.getElementById('register-form').classList.remove('hidden');
-        tabs[1].classList.add('active');
+function showTab(tab) {
+    if(tab === 'login') {
+        document.getElementById('form-login').style.display = 'block';
+        document.getElementById('form-register').style.display = 'none';
+        document.getElementById('tab-login').style.color = 'var(--accent)';
+        document.getElementById('tab-login').style.borderBottom = '2px solid var(--accent)';
+        document.getElementById('tab-register').style.color = 'var(--text-secondary)';
+        document.getElementById('tab-register').style.borderBottom = 'none';
+    } else {
+        document.getElementById('form-login').style.display = 'none';
+        document.getElementById('form-register').style.display = 'block';
+        document.getElementById('tab-register').style.color = 'var(--accent)';
+        document.getElementById('tab-register').style.borderBottom = '2px solid var(--accent)';
+        document.getElementById('tab-login').style.color = 'var(--text-secondary)';
+        document.getElementById('tab-login').style.borderBottom = 'none';
     }
+}
+
+function doLogin(username) {
+    // حفظ حالة تسجيل الدخول واسم المستخدم
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('username', username || 'مستخدم');
+    window.location.href = '../home/index.html';
 }

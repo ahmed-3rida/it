@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Forum</title>
     <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
         <header class="navbar">
@@ -26,6 +27,7 @@
                 <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
                 <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
                 <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
+                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء نقاش</a></li>
                 <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
                 <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
                 <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
@@ -44,10 +46,10 @@
         <main class="main-content">
             <div class="container-box">
                 <h2 class="accent-title" data-ar="إنشاء نقاش جديد" data-en="Create New Thread">إنشاء نقاش جديد</h2>
-                <form onsubmit="event.preventDefault(); showToast('Thread Created / تم إنشاء النقاش', 'success'); window.location.href='../home/index.html';">
+                <form onsubmit="handleThreadSubmit(event)">
                     <div class="form-group">
                         <label data-ar="اختر القسم" data-en="Select Category">اختر القسم</label>
-                        <select required>
+                        <select id="threadCategory" required>
                             <option value="" data-ar="اختر قسماً..." data-en="Select...">اختر قسماً...</option>
                             <option value="programming" data-ar="برمجة وتطوير" data-en="Programming">برمجة وتطوير</option>
                             <option value="gaming" data-ar="ألعاب فيديو" data-en="Gaming">ألعاب فيديو</option>
@@ -55,17 +57,18 @@
                     </div>
                     <div class="form-group">
                         <label data-ar="عنوان النقاش" data-en="Thread Title">عنوان النقاش</label>
-                        <input type="text" data-ar-placeholder="اكتب عنواناً يصف الموضوع..." data-en-placeholder="Write title..." placeholder="اكتب عنواناً يصف الموضوع..." required>
+                        <input type="text" id="threadTitle" data-ar-placeholder="اكتب عنواناً يصف الموضوع..." data-en-placeholder="Write title..." placeholder="اكتب عنواناً يصف الموضوع..." required>
                     </div>
                     <div class="form-group">
                         <label data-ar="المحتوى" data-en="Content">المحتوى</label>
-                        <textarea rows="6" data-ar-placeholder="اكتب تفاصيل النقاش هنا..." data-en-placeholder="Write details..." placeholder="اكتب تفاصيل النقاش هنا..." required></textarea>
+                        <textarea id="threadContent" rows="6" data-ar-placeholder="اكتب تفاصيل النقاش هنا..." data-en-placeholder="Write details..." placeholder="اكتب تفاصيل النقاش هنا..." required></textarea>
                     </div>
-                    <button type="submit" class="btn" data-ar="نشر النقاش" data-en="Post Thread">نشر النقاش</button>
+                    <button type="submit" id="threadSubmitBtn" class="btn" data-ar="نشر النقاش" data-en="Post Thread">نشر النقاش</button>
                 </form>
             </div>
         </main>
     </div>
+    <script src="script.js"></script>
     <script src="../shared.js"></script>
 </body>
 </html>

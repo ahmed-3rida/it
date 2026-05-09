@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Forum</title>
     <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
         <header class="navbar">
@@ -26,6 +27,7 @@
                 <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
                 <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
                 <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
+                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء نقاش</a></li>
                 <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
                 <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
                 <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
@@ -96,115 +98,14 @@
 
             <div class="container-box">
                 <h3 data-ar="Manage Ads (إدارة الإعلانات)" data-en="Manage Ads">Manage Ads (إدارة الإعلانات)</h3>
-                <ul style="list-style:none; padding:0;">
-                    <li style="padding:10px; border:1px solid var(--border-color); margin-bottom:5px; display:flex; justify-content:space-between;">
-                        <span>حملة إعلان منتج تقني</span>
-                        <button class="btn btn-secondary" style="padding:5px;" onclick="this.closest('li').remove(); showToast('Ad Stopped / تم إيقاف الإعلان', 'success');">إيقاف الإعلان</button>
-                    </li>
+                <ul id="adminAdsList" style="list-style:none; padding:0;">
+                    <!-- Ads will load here -->
                 </ul>
             </div>
         </main>
     </div>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        loadAdminPosts();
-        loadAdminReports();
-    });
-
-    function loadAdminPosts() {
-        let posts = JSON.parse(localStorage.getItem('myPosts') || '[]');
-        let list = document.getElementById('adminPostsList');
-        list.innerHTML = '';
-        
-        let lang = localStorage.getItem('site_lang') || 'ar';
-        let deleteText = lang === 'en' ? 'Delete' : 'حذف';
-
-        if(posts.length === 0) {
-            let emptyMsg = document.createElement('li');
-            emptyMsg.style.padding = '10px';
-            emptyMsg.style.textAlign = 'center';
-            emptyMsg.style.color = 'var(--text-secondary)';
-            emptyMsg.innerText = lang === 'en' ? 'No posts found.' : 'لا توجد منشورات.';
-            list.appendChild(emptyMsg);
-        }
-
-        posts.forEach(post => {
-            let li = document.createElement('li');
-            li.style = 'padding:10px; border:1px solid var(--border-color); margin-bottom:5px; display:flex; justify-content:space-between; align-items:center; border-radius:4px;';
-            li.innerHTML = `
-                <span style="flex-grow:1; margin-right:15px;">${post.title}</span>
-                <button class="btn" style="background:#e74c3c; padding:5px 10px;" onclick="adminDeletePost(${post.id})">${deleteText}</button>
-            `;
-            list.appendChild(li);
-        });
-        
-        // Update total posts counter based on dynamic posts (plus some dummy static ones)
-        document.getElementById('totalPosts').innerText = (3400 + posts.length).toLocaleString();
-    }
-
-    function adminDeletePost(postId) {
-        let posts = JSON.parse(localStorage.getItem('myPosts') || '[]');
-        posts = posts.filter(p => p.id !== postId);
-        localStorage.setItem('myPosts', JSON.stringify(posts));
-        
-        let lang = localStorage.getItem('site_lang') || 'ar';
-        showToast(lang === 'ar' ? 'تم حذف المنشور بنجاح!' : 'Post deleted successfully!', 'success');
-        loadAdminPosts();
-    }
-
-    function loadAdminReports() {
-        let reports = JSON.parse(localStorage.getItem('adminReports') || '[]');
-        let list = document.getElementById('adminReportsList');
-        list.innerHTML = '';
-        
-        let lang = localStorage.getItem('site_lang') || 'ar';
-        let ignoreText = lang === 'en' ? 'Ignore' : 'تجاهل';
-        let resolveText = lang === 'en' ? 'Resolve' : 'إغلاق البلاغ';
-
-        if(reports.length === 0) {
-            let emptyMsg = document.createElement('li');
-            emptyMsg.style.padding = '10px';
-            emptyMsg.style.textAlign = 'center';
-            emptyMsg.style.color = 'var(--text-secondary)';
-            emptyMsg.innerText = lang === 'en' ? 'No reports found.' : 'لا توجد بلاغات.';
-            list.appendChild(emptyMsg);
-        }
-
-        reports.forEach(report => {
-            let li = document.createElement('li');
-            li.style = 'padding:15px; border:1px solid var(--border-color); margin-bottom:5px; background:rgba(231, 76, 60, 0.05); border-radius:4px;';
-            
-            let reasonText = lang === 'en' ? report.reasonEn : report.reasonAr;
-            
-            li.innerHTML = `
-                <div style="margin-bottom:8px;"><strong>${reasonText}:</strong> ${report.target}</div>
-                <div style="display:flex; gap:10px;">
-                    <button class="btn btn-secondary" style="padding:5px 10px;" onclick="adminIgnoreReport(${report.id})">${ignoreText}</button>
-                    <button class="btn" style="background:#e74c3c; padding:5px 10px;" onclick="adminResolveReport(${report.id})">${resolveText}</button>
-                </div>
-            `;
-            list.appendChild(li);
-        });
-    }
-
-    function adminIgnoreReport(reportId) {
-        removeReportFromStorage(reportId);
-        loadAdminReports();
-    }
-
-    function adminResolveReport(reportId) {
-        removeReportFromStorage(reportId);
-        let lang = localStorage.getItem('site_lang') || 'ar';
-        showToast(lang === 'ar' ? 'تم إغلاق البلاغ وحل المشكلة!' : 'Report resolved!', 'success');
-        loadAdminReports();
-    }
-
-    function removeReportFromStorage(reportId) {
-        let reports = JSON.parse(localStorage.getItem('adminReports') || '[]');
-        reports = reports.filter(r => r.id !== reportId);
-        localStorage.setItem('adminReports', JSON.stringify(reports));
-    }
-    </script>
+    
     <script src="../shared.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

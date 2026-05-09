@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Forum</title>
     <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
         <header class="navbar">
@@ -26,6 +27,7 @@
                 <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
                 <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
                 <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
+                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء نقاش</a></li>
                 <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
                 <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
                 <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
@@ -62,29 +64,10 @@
                     <button type="submit" class="btn" style="margin-top: 10px;" data-ar="حفظ التغييرات" data-en="Save Changes">حفظ التغييرات</button>
                 </form>
             </div>
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                if (localStorage.getItem('isPrivateAccount') === 'true') {
-                    document.getElementById('privateAccountCheckbox').checked = true;
-                }
-                if (localStorage.getItem('allowDMs') === 'false') {
-                    document.getElementById('allowDMsCheckbox').checked = false;
-                }
-            });
-
-            function savePrivacy(event) {
-                event.preventDefault();
-                let isPrivate = document.getElementById('privateAccountCheckbox').checked;
-                let allowDMs = document.getElementById('allowDMsCheckbox').checked;
-                
-                localStorage.setItem('isPrivateAccount', isPrivate);
-                localStorage.setItem('allowDMs', allowDMs);
-                
-                showToast('تم حفظ إعدادات الخصوصية بنجاح! / Privacy settings saved!', 'success');
-            }
-            </script>
+            
         </main>
     </div>
     <script src="../shared.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

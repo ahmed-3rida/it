@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Forum</title>
     <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
         <header class="navbar">
@@ -26,6 +27,7 @@
                 <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
                 <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
                 <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
+                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء نقاش</a></li>
                 <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
                 <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
                 <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
@@ -72,61 +74,10 @@
                     </div>
                 </div>
             </div>
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                loadCategories();
-            });
-
-            function loadCategories() {
-                let saved = JSON.parse(localStorage.getItem('customCategories') || '[]');
-                let grid = document.getElementById('categoriesGrid');
-                let lang = localStorage.getItem('site_lang') || 'ar';
-                let threadsText = (lang === 'en') ? '0 Threads' : '0 موضوع';
-                let browseText = (lang === 'en') ? 'Browse' : 'تصفح';
-                
-                saved.forEach(val => {
-                    let div = document.createElement('div');
-                    div.style = 'background: var(--bg-color); padding: 20px; text-align: center; border-radius: 8px; border: 1px solid var(--border-color);';
-                    div.innerHTML = `
-                        <h3 style="margin-bottom: 10px;">✨ ${val}</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 15px;" data-ar="0 موضوع" data-en="0 Threads">${threadsText}</p>
-                        <button class="btn" onclick="window.location.href='../home/index.html?category=${encodeURIComponent(val)}'" data-ar="تصفح" data-en="Browse">${browseText}</button>
-                    `;
-                    grid.prepend(div);
-                });
-            }
-
-            function addCategory(e, form) {
-                e.preventDefault();
-                let input = form.querySelector('input');
-                let val = input.value.trim();
-                if(val === '') return;
-                
-                let saved = JSON.parse(localStorage.getItem('customCategories') || '[]');
-                if(!saved.includes(val)) {
-                    saved.push(val);
-                    localStorage.setItem('customCategories', JSON.stringify(saved));
-                }
-                
-                let grid = document.getElementById('categoriesGrid');
-                let div = document.createElement('div');
-                div.style = 'background: var(--bg-color); padding: 20px; text-align: center; border-radius: 8px; border: 1px solid var(--border-color);';
-                
-                let lang = localStorage.getItem('site_lang') || 'ar';
-                let threadsText = (lang === 'en') ? '0 Threads' : '0 موضوع';
-                let browseText = (lang === 'en') ? 'Browse' : 'تصفح';
-                
-                div.innerHTML = `
-                    <h3 style="margin-bottom: 10px;">✨ ${val}</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 15px;" data-ar="0 موضوع" data-en="0 Threads">${threadsText}</p>
-                    <button class="btn" onclick="window.location.href='../home/index.html?category=${encodeURIComponent(val)}'" data-ar="تصفح" data-en="Browse">${browseText}</button>
-                `;
-                grid.prepend(div);
-                input.value = '';
-            }
-            </script>
+            
         </main>
     </div>
     <script src="../shared.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

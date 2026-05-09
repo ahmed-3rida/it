@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Forum</title>
     <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
         <header class="navbar">
@@ -26,6 +27,7 @@
                 <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
                 <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
                 <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
+                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء نقاش</a></li>
                 <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
                 <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
                 <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
@@ -51,24 +53,25 @@
                     <p><span data-ar="الميزانية المتبقية:" data-en="Remaining Budget:">الميزانية المتبقية:</span> <strong style="color: #10b981;">$150.00</strong></p>
                 </div>
                 <h3 data-ar="إنشاء حملة إعلانية جديدة" data-en="Create New Campaign">إنشاء حملة إعلانية جديدة</h3>
-                <form onsubmit="event.preventDefault(); showToast('Campaign Submitted / تم إرسال الحملة', 'success');">
+                <form onsubmit="submitAd(event, this)">
                     <div class="form-group">
                         <label data-ar="عنوان الإعلان" data-en="Ad Title">عنوان الإعلان</label>
-                        <input type="text" data-ar-placeholder="عنوان جذاب للمنتج..." data-en-placeholder="Catchy title..." placeholder="عنوان جذاب للمنتج..." required>
+                        <input type="text" id="adTitle" data-ar-placeholder="عنوان جذاب للمنتج..." data-en-placeholder="Catchy title..." placeholder="عنوان جذاب للمنتج..." required>
                     </div>
                     <div class="form-group">
                         <label data-ar="رابط الإعلان" data-en="Ad Link">رابط الإعلان</label>
-                        <input type="url" placeholder="https://..." required>
+                        <input type="url" id="adLink" placeholder="https://..." required>
                     </div>
                     <div class="form-group">
                         <label data-ar="الميزانية اليومية ($)" data-en="Daily Budget ($)">الميزانية اليومية ($)</label>
-                        <input type="number" min="1" placeholder="10" required>
+                        <input type="number" id="adBudget" min="1" placeholder="10" required>
                     </div>
                     <button type="submit" class="btn" data-ar="إنشاء الإعلان" data-en="Create Ad">إنشاء الإعلان</button>
                 </form>
             </div>
         </main>
     </div>
+    <script src="script.js"></script>
     <script src="../shared.js"></script>
 </body>
 </html>
