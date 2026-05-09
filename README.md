@@ -52,8 +52,8 @@ This project is the result of a collaborative effort by a dedicated team of 6 de
 
 ### 👑 Team Leader
 **Ahmed Salman Hameed**
-- **Core Infrastructure**: Platform architecture (`shared.js`, `shared.css`).
-- **Authentication**: User security and access control (`login_register`).
+- **Core Platform Logic**: Main infrastructure and helper functions (`shared.js`).
+- **Authentication**: User security and access control system (`login_register`).
 - **Main Feed**: Core user experience and chronical feed logic (`home`).
 - **Monetization**: Ad integration and management system (`ads`).
 
@@ -62,16 +62,15 @@ This project is the result of a collaborative effort by a dedicated team of 6 de
 ### 🛠️ Development Team
 
 #### **Kareem Ayman Bakr**
-*Identity & Personalization*
-- **User Identity**: Public profile rendering and data fetching (`profile`).
-- **Customization**: Profile editing and avatar management (`edit_profile`).
-- **Security**: Granular privacy controls and account settings (`privacy_settings`).
+*Navigation & Alerts*
+- **Community Hub**: Structure and layout of forum categories (`categories`).
+- **Alert System**: Global notification system for user events (`notifications`).
 
 #### **Abdelrahman Mohamed Khairy**
-*Discovery & Organization*
-- **Community Hub**: Structure and layout of forum categories (`categories`).
+*Discovery & Privacy*
 - **Analytics**: Real-time trending topics and hot content logic (`trending`).
 - **Navigation**: Global search engine and user discovery system (`search`).
+- **Security**: Granular privacy controls and account settings (`privacy_settings`).
 
 #### **Youssef Safwat Arnest**
 *Interactive Engagement*
@@ -84,11 +83,12 @@ This project is the result of a collaborative effort by a dedicated team of 6 de
 - **Discussions**: Thread management and hierarchical comment logic (`create_thread`).
 
 #### **Mostafa Taher Helmy**
-*Operations & Safety*
+*Operations & Core Design*
+- **Core Design**: Global design system, tokens, and animations (`shared.css`).
 - **Admin Panel**: Global platform management and metrics (`admin_dashboard`).
 - **User Insights**: Personal dashboard for tracking user activity (`user_dashboard`).
 - **Governance**: Content moderation and reporting tools (`moderation`).
-- **Alerts**: Global notification system for user events (`notifications`).
+- **User Identity**: Public profile rendering and profile editing (`profile`, `edit_profile`).
 
 ---
 
