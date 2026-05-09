@@ -7,64 +7,88 @@
     <link rel="stylesheet" href="../shared.css">
 </head>
 <body>
-    <header class="navbar">
+        <header class="navbar">
         <div class="logo">Social Forum</div>
-        <div class="search-bar" style="display:flex; flex-grow:1; max-width:400px; margin: 0 20px;">
-            <input type="text" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'">
+        <div class="search-bar">
+            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'" readonly>
         </div>
-        <nav class="nav-links" style="display: flex; align-items: center; gap: 10px;">
+        <nav class="nav-links">
             <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
             <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
-            <button onclick="toggleLang(event)" class="btn btn-secondary" style="padding: 5px 10px; font-size: 14px;" data-ar="English" data-en="العربية">English</button>
-            <a href="../login_register/index.html" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+            <button onclick="toggleLang(event)" class="lang-btn" data-ar="English" data-en="العربية">English</button>
+            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
         </nav>
     </header>
     <div class="layout-container">
-        <aside class="global-sidebar">
+                <aside class="global-sidebar">
             <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
             <ul>
-                <li><a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                <li><a href="../search/index.html" data-ar="البحث" data-en="Search">البحث</a></li>
-                <li><a href="../create_post/index.html" data-ar="إنشاء منشور" data-en="Create Post">إنشاء منشور</a></li>
-                <li><a href="../chat/index.html" data-ar="المحادثات" data-en="Chat">المحادثات</a></li>
-                <li><a href="../categories/index.html" data-ar="الأقسام" data-en="Categories">الأقسام</a></li>
-                <li><a href="../trending/index.html" data-ar="الشائع" data-en="Trending">الشائع</a></li>
-                <li><a href="../polls/index.html" data-ar="الاستطلاعات" data-en="Polls">الاستطلاعات</a></li>
+                <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
+                <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
+                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
+                <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
+                <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
+                <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
+                <li><a href="../polls/index.html" data-ar="📊 الاستطلاعات" data-en="📊 Polls">📊 الاستطلاعات</a></li>
             </ul>
-            <h3 style="margin-top:20px;" data-ar="الإعدادات والتحكم" data-en="Settings">الإعدادات والتحكم</h3>
+            <h3 style="margin-top:4px;" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
             <ul>
-                <li><a href="../user_dashboard/index.html" data-ar="لوحة تحكمي" data-en="Dashboard">لوحة تحكمي</a></li>
-                <li><a href="../admin_dashboard/index.html" data-ar="لوحة الإدارة" data-en="Admin">لوحة الإدارة</a></li>
-                <li><a href="../moderation/index.html" data-ar="الإبلاغ والحظر" data-en="Moderation">الإبلاغ والحظر</a></li>
-                <li><a href="../create_thread/index.html" data-ar="نقاش جديد" data-en="New Thread">نقاش جديد</a></li>
-                <li><a href="../notifications/index.html" data-ar="الإشعارات" data-en="Notifications">الإشعارات</a></li>
-                <li><a href="../ads/index.html" data-ar="الإعلانات" data-en="Ads">الإعلانات</a></li>
-                <li><a href="../privacy_settings/index.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a></li>
+                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a></li>
+                <li><a href="../moderation/index.html" data-ar="⚠️ الإبلاغ" data-en="⚠️ Moderation">⚠️ الإبلاغ</a></li>
+                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔 الإشعارات</a></li>
+                <li><a href="../ads/index.html" data-ar="📢 الإعلانات" data-en="📢 Ads">📢 الإعلانات</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a></li>
             </ul>
         </aside>
         <main class="main-content">
             <div class="container-box">
                 <h2 class="accent-title" data-ar="تعديل الملف الشخصي" data-en="Edit Profile">تعديل الملف الشخصي</h2>
-                <form onsubmit="event.preventDefault(); alert('Saved / تم الحفظ'); window.location.href='../profile/index.html';">
+                <form onsubmit="handleEditSubmit(event)">
                     <div style="text-align: center; margin-bottom: 20px;">
-                        <img src="https://via.placeholder.com/100" alt="Avatar" style="border-radius: 50%;">
-                        <div class="form-group" style="margin-top: 10px;">
+                        <div id="editAvatar" style="width:100px; height:100px; border-radius:50%; background: linear-gradient(135deg, #0079d3, #7e57c2); margin: 0 auto; display:flex; align-items:center; justify-content:center; color:white; font-size:40px; font-weight:bold;">?</div>
+                        <div class="form-group" style="margin-top: 15px;">
                             <input type="file" accept="image/*">
                         </div>
                     </div>
                     <div class="form-group">
                         <label data-ar="اسم المستخدم" data-en="Username">اسم المستخدم</label>
-                        <input type="text" value="أحمد محمد" required>
+                        <input type="text" id="editUsername" required>
                     </div>
                     <div class="form-group">
                         <label data-ar="نبذة عني (Bio)" data-en="Bio">نبذة عني (Bio)</label>
-                        <textarea rows="3">مطور ويب محب للتكنولوجيا والذكاء الاصطناعي.</textarea>
+                        <textarea rows="3" data-ar-placeholder="اكتب نبذة عنك..." data-en-placeholder="Write your bio..." placeholder="اكتب نبذة عنك..."></textarea>
                     </div>
-                    <button type="submit" class="btn" data-ar="حفظ التعديلات" data-en="Save Changes">حفظ التعديلات</button>
+                    <button type="submit" class="btn" id="editSubmitBtn" data-ar="حفظ التعديلات" data-en="Save Changes">حفظ التعديلات</button>
                 </form>
             </div>
         </main>
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let name = localStorage.getItem('username') || 'المستخدم';
+        document.getElementById('editUsername').value = name;
+        document.getElementById('editAvatar').innerText = name.charAt(0).toUpperCase();
+    });
+
+    function handleEditSubmit(event) {
+        event.preventDefault();
+        let nameInput = document.getElementById('editUsername').value.trim();
+        if(nameInput) {
+            localStorage.setItem('username', nameInput);
+        }
+        let btn = document.getElementById('editSubmitBtn');
+        let lang = localStorage.getItem('site_lang') || 'ar';
+        btn.innerText = lang === 'ar' ? 'جاري الحفظ...' : 'Saving...';
+        btn.disabled = true;
+        
+        showToast(lang === 'ar' ? 'تم حفظ التعديلات بنجاح!' : 'Changes saved successfully!', 'success');
+        
+        setTimeout(() => {
+            window.location.href = '../profile/index.html';
+        }, 1200);
+    }
+    </script>
     <script src="../shared.js"></script>
 </body>
 </html>

@@ -7,39 +7,38 @@
     <link rel="stylesheet" href="../shared.css">
 </head>
 <body>
-    <header class="navbar">
+        <header class="navbar">
         <div class="logo">Social Forum</div>
-        <div class="search-bar" style="display:flex; flex-grow:1; max-width:400px; margin: 0 20px;">
-            <input type="text" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'">
+        <div class="search-bar">
+            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'" readonly>
         </div>
-        <nav class="nav-links" style="display: flex; align-items: center; gap: 10px;">
+        <nav class="nav-links">
             <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
             <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
-            <button onclick="toggleLang(event)" class="btn btn-secondary" style="padding: 5px 10px; font-size: 14px;" data-ar="English" data-en="العربية">English</button>
-            <a href="../login_register/index.html" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+            <button onclick="toggleLang(event)" class="lang-btn" data-ar="English" data-en="العربية">English</button>
+            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
         </nav>
     </header>
     <div class="layout-container">
-        <aside class="global-sidebar">
+                <aside class="global-sidebar">
             <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
             <ul>
-                <li><a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                <li><a href="../search/index.html" data-ar="البحث" data-en="Search">البحث</a></li>
-                <li><a href="../create_post/index.html" data-ar="إنشاء منشور" data-en="Create Post">إنشاء منشور</a></li>
-                <li><a href="../chat/index.html" data-ar="المحادثات" data-en="Chat">المحادثات</a></li>
-                <li><a href="../categories/index.html" data-ar="الأقسام" data-en="Categories">الأقسام</a></li>
-                <li><a href="../trending/index.html" data-ar="الشائع" data-en="Trending">الشائع</a></li>
-                <li><a href="../polls/index.html" data-ar="الاستطلاعات" data-en="Polls">الاستطلاعات</a></li>
+                <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
+                <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
+                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
+                <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
+                <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
+                <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
+                <li><a href="../polls/index.html" data-ar="📊 الاستطلاعات" data-en="📊 Polls">📊 الاستطلاعات</a></li>
             </ul>
-            <h3 style="margin-top:20px;" data-ar="الإعدادات والتحكم" data-en="Settings">الإعدادات والتحكم</h3>
+            <h3 style="margin-top:4px;" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
             <ul>
-                <li><a href="../user_dashboard/index.html" data-ar="لوحة تحكمي" data-en="Dashboard">لوحة تحكمي</a></li>
-                <li><a href="../admin_dashboard/index.html" data-ar="لوحة الإدارة" data-en="Admin">لوحة الإدارة</a></li>
-                <li><a href="../moderation/index.html" data-ar="الإبلاغ والحظر" data-en="Moderation">الإبلاغ والحظر</a></li>
-                <li><a href="../create_thread/index.html" data-ar="نقاش جديد" data-en="New Thread">نقاش جديد</a></li>
-                <li><a href="../notifications/index.html" data-ar="الإشعارات" data-en="Notifications">الإشعارات</a></li>
-                <li><a href="../ads/index.html" data-ar="الإعلانات" data-en="Ads">الإعلانات</a></li>
-                <li><a href="../privacy_settings/index.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a></li>
+                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a></li>
+                <li><a href="../moderation/index.html" data-ar="⚠️ الإبلاغ" data-en="⚠️ Moderation">⚠️ الإبلاغ</a></li>
+                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔 الإشعارات</a></li>
+                <li><a href="../ads/index.html" data-ar="📢 الإعلانات" data-en="📢 Ads">📢 الإعلانات</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a></li>
             </ul>
         </aside>
         <main class="main-content">
@@ -52,7 +51,7 @@
                     <p><span data-ar="الميزانية المتبقية:" data-en="Remaining Budget:">الميزانية المتبقية:</span> <strong style="color: #10b981;">$150.00</strong></p>
                 </div>
                 <h3 data-ar="إنشاء حملة إعلانية جديدة" data-en="Create New Campaign">إنشاء حملة إعلانية جديدة</h3>
-                <form onsubmit="event.preventDefault(); alert('Campaign Submitted / تم إرسال الحملة');">
+                <form onsubmit="event.preventDefault(); showToast('Campaign Submitted / تم إرسال الحملة', 'success');">
                     <div class="form-group">
                         <label data-ar="عنوان الإعلان" data-en="Ad Title">عنوان الإعلان</label>
                         <input type="text" data-ar-placeholder="عنوان جذاب للمنتج..." data-en-placeholder="Catchy title..." placeholder="عنوان جذاب للمنتج..." required>

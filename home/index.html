@@ -3,155 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Forum</title>
+    <title>Social Forum - الرئيسية</title>
     <link rel="stylesheet" href="../shared.css">
 </head>
 <body>
     <header class="navbar">
         <div class="logo">Social Forum</div>
-        <div class="search-bar" style="display:flex; flex-grow:1; max-width:400px; margin: 0 20px;">
-            <input type="text" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'">
+        <div class="search-bar">
+            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'" readonly>
         </div>
-        <nav class="nav-links" style="display: flex; align-items: center; gap: 10px;">
+        <nav class="nav-links">
             <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
             <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
-            <button onclick="toggleLang(event)" class="btn btn-secondary" style="padding: 5px 10px; font-size: 14px;" data-ar="English" data-en="العربية">English</button>
-            <a href="../login_register/index.html" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+            <button onclick="toggleLang(event)" class="lang-btn" data-ar="English" data-en="العربية">English</button>
+            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
         </nav>
     </header>
+
     <div class="layout-container">
-        <aside class="global-sidebar">
+                <aside class="global-sidebar">
             <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
             <ul>
-                <li><a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                <li><a href="../search/index.html" data-ar="البحث" data-en="Search">البحث</a></li>
-                <li><a href="../create_post/index.html" data-ar="إنشاء منشور" data-en="Create Post">إنشاء منشور</a></li>
-                <li><a href="../chat/index.html" data-ar="المحادثات" data-en="Chat">المحادثات</a></li>
-                <li><a href="../categories/index.html" data-ar="الأقسام" data-en="Categories">الأقسام</a></li>
-                <li><a href="../trending/index.html" data-ar="الشائع" data-en="Trending">الشائع</a></li>
-                <li><a href="../polls/index.html" data-ar="الاستطلاعات" data-en="Polls">الاستطلاعات</a></li>
+                <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
+                <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
+                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
+                <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
+                <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
+                <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
+                <li><a href="../polls/index.html" data-ar="📊 الاستطلاعات" data-en="📊 Polls">📊 الاستطلاعات</a></li>
             </ul>
-            <h3 style="margin-top:20px;" data-ar="الإعدادات والتحكم" data-en="Settings">الإعدادات والتحكم</h3>
+            <h3 style="margin-top:4px;" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
             <ul>
-                <li><a href="../user_dashboard/index.html" data-ar="لوحة تحكمي" data-en="Dashboard">لوحة تحكمي</a></li>
-                <li><a href="../admin_dashboard/index.html" data-ar="لوحة الإدارة" data-en="Admin">لوحة الإدارة</a></li>
-                <li><a href="../moderation/index.html" data-ar="الإبلاغ والحظر" data-en="Moderation">الإبلاغ والحظر</a></li>
-                <li><a href="../create_thread/index.html" data-ar="نقاش جديد" data-en="New Thread">نقاش جديد</a></li>
-                <li><a href="../notifications/index.html" data-ar="الإشعارات" data-en="Notifications">الإشعارات</a></li>
-                <li><a href="../ads/index.html" data-ar="الإعلانات" data-en="Ads">الإعلانات</a></li>
-                <li><a href="../privacy_settings/index.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a></li>
+                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a></li>
+                <li><a href="../moderation/index.html" data-ar="⚠️ الإبلاغ" data-en="⚠️ Moderation">⚠️ الإبلاغ</a></li>
+                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔 الإشعارات</a></li>
+                <li><a href="../ads/index.html" data-ar="📢 الإعلانات" data-en="📢 Ads">📢 الإعلانات</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a></li>
             </ul>
         </aside>
-        <main class="main-content">
-            
-            <h2 class="accent-title" style="margin-bottom: 20px;">
-                <span data-ar="مرحباً بك، " data-en="Welcome, ">مرحباً بك، </span>
-                <span id="userNameDisplay">المستخدم</span>!
-            </h2>
 
-            <div class="container-box" style="display:flex; gap:10px; cursor:pointer;" onclick="window.location.href='../create_post/index.html'">
-                <input type="text" data-ar-placeholder="بم تفكر؟..." data-en-placeholder="What's on your mind?..." placeholder="بم تفكر؟..." readonly style="width:100%; padding:10px; border-radius:4px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
-                <button class="btn" data-ar="نشر" data-en="Post">نشر</button>
+        <main class="main-content">
+            <!-- Welcome bar -->
+            <div class="container-box" style="display:flex; align-items:center; gap:16px; padding:16px 20px; margin-bottom:16px;">
+                <div id="homeUserAvatar" style="width:48px; height:48px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; color:white; flex-shrink:0;">?</div>
+                <input type="text" id="postQuickInput" data-ar-placeholder="بم تفكر؟ شارك أفكارك..." data-en-placeholder="What's on your mind?" placeholder="بم تفكر؟ شارك أفكارك..." style="flex:1; background:var(--bg-color); border:1px solid var(--border-color); border-radius:50px; padding:12px 18px; color:var(--text-secondary); cursor:pointer; font-size:15px;" onclick="window.location.href='../create_post/index.html'" readonly>
+                <a href="../create_post/index.html" class="btn" data-ar="📝 نشر" data-en="📝 Post">📝 نشر</a>
             </div>
 
-            <!-- منشور نصي عادي -->
+            <!-- Post 1 - Text post -->
             <div class="post">
-                <div class="post-header" style="justify-content: space-between;">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <img src="https://via.placeholder.com/40" alt="Avatar">
+                <div class="post-header">
+                    <div class="left">
+                        <div class="avatar" style="background:#7e57c2;">أ</div>
                         <div>
                             <div class="username" data-ar="أحمد محمد" data-en="Ahmed Mohamed">أحمد محمد</div>
                             <div class="time" data-ar="قبل ساعتين" data-en="2 hours ago">قبل ساعتين</div>
                         </div>
                     </div>
-                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="toggleFollow(this)" data-ar="متابعة" data-en="Follow">متابعة</button>
+                    <button class="btn btn-secondary" style="padding:6px 14px; font-size:13px;" onclick="toggleFollow(this)" data-ar="+ متابعة" data-en="+ Follow">+ متابعة</button>
                 </div>
-                <h2 class="accent-title" data-ar="الذكاء الاصطناعي في 2026" data-en="AI in 2026">الذكاء الاصطناعي في 2026</h2>
-                <p data-ar="مجال الذكاء الاصطناعي يتطور بشكل مخيف ومبهر في نفس الوقت. ما رأيكم؟" data-en="AI field is evolving rapidly. What do you think?">مجال الذكاء الاصطناعي يتطور بشكل مخيف ومبهر في نفس الوقت. ما رأيكم؟</p>
+                <h2 class="accent-title" style="font-size:18px; margin-bottom:8px;" data-ar="الذكاء الاصطناعي في 2026" data-en="AI in 2026">الذكاء الاصطناعي في 2026</h2>
+                <p style="color:var(--text-secondary); line-height:1.7; margin:0;" data-ar="مجال الذكاء الاصطناعي يتطور بشكل مخيف ومبهر في نفس الوقت. النماذج أصبحت تكتب كوداً أفضل من كثير من المبرمجين. ما رأيكم في هذا التطور؟" data-en="The AI field is evolving at a breathtaking pace. Models now write better code than many developers. What do you think about this progress?">مجال الذكاء الاصطناعي يتطور بشكل مخيف ومبهر في نفس الوقت. النماذج أصبحت تكتب كوداً أفضل من كثير من المبرمجين. ما رأيكم في هذا التطور؟</p>
                 <div class="post-actions">
                     <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span data-ar="أعجبني" data-en="Like">أعجبني</span> (<span class="like-count">15</span>)</button>
                     <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span data-ar="تعليق" data-en="Comment">تعليق</span> (<span class="comment-count">0</span>)</button>
+                    <button class="action-btn" onclick="toggleSaveGlobal(this)">🔖 <span data-ar="حفظ" data-en="Save">حفظ</span></button>
                 </div>
-                <div class="comment-section" style="display:none; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px;">
-                    <div style="display:flex; gap:10px; margin-bottom: 15px;">
-                        <input type="text" data-ar-placeholder="أضف تعليقاً..." data-en-placeholder="Add a comment..." placeholder="أضف تعليقاً..." style="flex-grow:1; padding:10px; border-radius:4px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
-                        <button class="btn" onclick="addInlineComment(this)" data-ar="إضافة" data-en="Add">إضافة</button>
-                    </div>
-                    <div class="comments-list">
-                    </div>
-                </div>
-            </div>
-
-            <!-- منشور رابط (Link Sharing) -->
-            <div class="post">
-                <div class="post-header" style="justify-content: space-between;">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <img src="https://via.placeholder.com/40" alt="Avatar">
-                        <div>
-                            <div class="username" data-ar="عمر خالد" data-en="Omar Khaled">عمر خالد</div>
-                            <div class="time" data-ar="قبل 3 ساعات" data-en="3 hours ago">قبل 3 ساعات</div>
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="toggleFollow(this)" data-ar="متابعة" data-en="Follow">متابعة</button>
-                </div>
-                <h2 class="accent-title" data-ar="مقال مفيد جداً للمبرمجين" data-en="Useful article for devs">مقال مفيد جداً للمبرمجين</h2>
-                <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin-top:10px;">
-                    <h4 style="margin: 0 0 5px 0;">أهم 10 أدوات لمطوري الويب في 2026</h4>
-                    <p style="margin: 0 0 10px 0; font-size: 14px; color: var(--text-secondary);">تعرف على الأدوات التي ستزيد من إنتاجيتك بشكل كبير...</p>
-                    <a href="#" style="color: var(--accent); font-weight: bold;">اقرأ المزيد ➔</a>
-                </div>
-                <div class="post-actions">
-                    <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span data-ar="أعجبني" data-en="Like">أعجبني</span> (<span class="like-count">45</span>)</button>
-                    <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span data-ar="تعليق" data-en="Comment">تعليق</span> (<span class="comment-count">0</span>)</button>
-                </div>
-                <div class="comment-section" style="display:none; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px;">
-                    <div style="display:flex; gap:10px; margin-bottom: 15px;">
-                        <input type="text" data-ar-placeholder="أضف تعليقاً..." data-en-placeholder="Add a comment..." placeholder="أضف تعليقاً..." style="flex-grow:1; padding:10px; border-radius:4px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
-                        <button class="btn" onclick="addInlineComment(this)" data-ar="إضافة" data-en="Add">إضافة</button>
+                <div class="comment-section" style="display:none;">
+                    <div class="comment-input-row">
+                        <input type="text" data-ar-placeholder="أضف تعليقاً..." data-en-placeholder="Add a comment..." placeholder="أضف تعليقاً..." style="flex:1; padding:10px 14px; border-radius:50px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);" onkeydown="if(event.key==='Enter') addInlineComment(this.nextElementSibling)">
+                        <button class="btn" style="border-radius:50px; padding:10px 18px;" onclick="addInlineComment(this)" data-ar="إضافة" data-en="Add">إضافة</button>
                     </div>
                     <div class="comments-list"></div>
                 </div>
             </div>
 
-            <!-- منشور مع صورة -->
+            <!-- Post 2 - Link post -->
             <div class="post">
-                <div class="post-header" style="justify-content: space-between;">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <img src="https://via.placeholder.com/40" alt="Avatar">
+                <div class="post-header">
+                    <div class="left">
+                        <div class="avatar" style="background:#26a69a;">ع</div>
+                        <div>
+                            <div class="username" data-ar="عمر خالد" data-en="Omar Khaled">عمر خالد</div>
+                            <div class="time" data-ar="قبل 3 ساعات" data-en="3 hours ago">قبل 3 ساعات</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" style="padding:6px 14px; font-size:13px;" onclick="toggleFollow(this)" data-ar="+ متابعة" data-en="+ Follow">+ متابعة</button>
+                </div>
+                <h2 class="accent-title" style="font-size:18px; margin-bottom:8px;" data-ar="مقال مفيد جداً للمبرمجين" data-en="Useful article for devs">مقال مفيد جداً للمبرمجين</h2>
+                <div style="background:var(--bg-color); padding:16px; border-radius:10px; border:1px solid var(--border-color); margin-top:8px;">
+                    <h4 style="margin:0 0 6px 0; font-size:15px;" data-ar="أهم 10 أدوات لمطوري الويب في 2026" data-en="Top 10 Web Dev Tools in 2026">أهم 10 أدوات لمطوري الويب في 2026</h4>
+                    <p style="margin:0 0 10px 0; font-size:13px; color:var(--text-secondary);" data-ar="تعرف على الأدوات التي ستزيد من إنتاجيتك بشكل كبير..." data-en="Discover tools that will boost your productivity massively...">تعرف على الأدوات التي ستزيد من إنتاجيتك بشكل كبير...</p>
+                    <a href="#" style="color:var(--accent); font-weight:700; font-size:13px;" data-ar="اقرأ المزيد →" data-en="Read more →">اقرأ المزيد →</a>
+                </div>
+                <div class="post-actions">
+                    <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span data-ar="أعجبني" data-en="Like">أعجبني</span> (<span class="like-count">45</span>)</button>
+                    <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span data-ar="تعليق" data-en="Comment">تعليق</span> (<span class="comment-count">0</span>)</button>
+                    <button class="action-btn" onclick="toggleSaveGlobal(this)">🔖 <span data-ar="حفظ" data-en="Save">حفظ</span></button>
+                </div>
+                <div class="comment-section" style="display:none;">
+                    <div class="comment-input-row">
+                        <input type="text" data-ar-placeholder="أضف تعليقاً..." data-en-placeholder="Add a comment..." placeholder="أضف تعليقاً..." style="flex:1; padding:10px 14px; border-radius:50px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);" onkeydown="if(event.key==='Enter') addInlineComment(this.nextElementSibling)">
+                        <button class="btn" style="border-radius:50px; padding:10px 18px;" onclick="addInlineComment(this)" data-ar="إضافة" data-en="Add">إضافة</button>
+                    </div>
+                    <div class="comments-list"></div>
+                </div>
+            </div>
+
+            <!-- Post 3 - Image post -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="left">
+                        <div class="avatar" style="background:#ef5350;">س</div>
                         <div>
                             <div class="username" data-ar="سارة علي" data-en="Sara Ali">سارة علي</div>
                             <div class="time" data-ar="قبل 5 ساعات" data-en="5 hours ago">قبل 5 ساعات</div>
                         </div>
                     </div>
-                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="toggleFollow(this)" data-ar="متابعة" data-en="Follow">متابعة</button>
+                    <button class="btn btn-secondary" style="padding:6px 14px; font-size:13px;" onclick="toggleFollow(this)" data-ar="+ متابعة" data-en="+ Follow">+ متابعة</button>
                 </div>
-                <h2 class="accent-title" data-ar="صورة من رحلتي الأخيرة" data-en="Photo from my last trip">صورة من رحلتي الأخيرة</h2>
-                <p data-ar="الطبيعة خلابة جداً اليوم!" data-en="Nature is stunning today!">الطبيعة خلابة جداً اليوم!</p>
-                <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=600&q=80" alt="Nature" style="width:100%; border-radius:8px; margin-top:10px;">
+                <h2 class="accent-title" style="font-size:18px; margin-bottom:8px;" data-ar="صورة من رحلتي الأخيرة" data-en="Photo from my last trip">صورة من رحلتي الأخيرة</h2>
+                <p style="color:var(--text-secondary); margin:0 0 10px;" data-ar="الطبيعة خلابة جداً اليوم!" data-en="Nature is stunning today!">الطبيعة خلابة جداً اليوم!</p>
+                <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=600&q=80" alt="Nature" style="width:100%; border-radius:10px; max-height:400px; object-fit:cover;">
                 <div class="post-actions">
                     <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span data-ar="أعجبني" data-en="Like">أعجبني</span> (<span class="like-count">120</span>)</button>
                     <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span data-ar="تعليق" data-en="Comment">تعليق</span> (<span class="comment-count">0</span>)</button>
+                    <button class="action-btn" onclick="toggleSaveGlobal(this)">🔖 <span data-ar="حفظ" data-en="Save">حفظ</span></button>
                 </div>
-                <div class="comment-section" style="display:none; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px;">
-                    <div style="display:flex; gap:10px; margin-bottom: 15px;">
-                        <input type="text" data-ar-placeholder="أضف تعليقاً..." data-en-placeholder="Add a comment..." placeholder="أضف تعليقاً..." style="flex-grow:1; padding:10px; border-radius:4px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
-                        <button class="btn" onclick="addInlineComment(this)" data-ar="إضافة" data-en="Add">إضافة</button>
+                <div class="comment-section" style="display:none;">
+                    <div class="comment-input-row">
+                        <input type="text" data-ar-placeholder="أضف تعليقاً..." data-en-placeholder="Add a comment..." placeholder="أضف تعليقاً..." style="flex:1; padding:10px 14px; border-radius:50px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);" onkeydown="if(event.key==='Enter') addInlineComment(this.nextElementSibling)">
+                        <button class="btn" style="border-radius:50px; padding:10px 18px;" onclick="addInlineComment(this)" data-ar="إضافة" data-en="Add">إضافة</button>
                     </div>
-                    <div class="comments-list">
-                    </div>
+                    <div class="comments-list"></div>
                 </div>
             </div>
-
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let name = localStorage.getItem('username');
-                if (name) {
-                    document.getElementById('userNameDisplay').innerText = name;
-                }
-            });
-            </script>
         </main>
     </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let name = localStorage.getItem('username') || '';
+        let avatarEl = document.getElementById('homeUserAvatar');
+        if(name && avatarEl) {
+            avatarEl.innerText = name.charAt(0).toUpperCase();
+        }
+
+        // Load user posts
+        let myPosts = JSON.parse(localStorage.getItem('myPosts') || '[]');
+        let mainContent = document.querySelector('.main-content');
+        let welcomeBar = document.querySelector('.container-box');
+        
+        myPosts.forEach(post => {
+            let div = document.createElement('div');
+            div.className = 'post';
+            div.setAttribute('data-post-id', post.id);
+            let timeText = localStorage.getItem('site_lang') === 'en' ? 'Just now' : 'الآن';
+            let uName = name || (localStorage.getItem('site_lang') === 'en' ? 'User' : 'مستخدم');
+            let firstLetter = uName.charAt(0).toUpperCase();
+            
+            div.innerHTML = `
+                <div class="post-header">
+                    <div class="left">
+                        <div class="avatar" style="background:var(--accent);">${firstLetter}</div>
+                        <div>
+                            <div class="username">${uName}</div>
+                            <div class="time">${timeText}</div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="accent-title" style="font-size:18px; margin-bottom:8px;">${post.title}</h2>
+                <p style="color:var(--text-secondary); line-height:1.7; margin:0;">${post.content}</p>
+                ${post.media ? `<img src="${post.media}" style="width:100%; border-radius:10px; max-height:400px; object-fit:cover; margin-top:10px;">` : ''}
+                <div class="post-actions">
+                    <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span>${localStorage.getItem('site_lang') === 'en' ? 'Like' : 'أعجبني'}</span> (<span class="like-count">0</span>)</button>
+                    <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span>${localStorage.getItem('site_lang') === 'en' ? 'Comment' : 'تعليق'}</span> (<span class="comment-count">0</span>)</button>
+                    <button class="action-btn" onclick="toggleSaveGlobal(this)">🔖 <span>${localStorage.getItem('site_lang') === 'en' ? 'Save' : 'حفظ'}</span></button>
+                </div>
+                <div class="comment-section" style="display:none;">
+                    <div class="comment-input-row">
+                        <input type="text" placeholder="${localStorage.getItem('site_lang') === 'en' ? 'Add a comment...' : 'أضف تعليقاً...'}" style="flex:1; padding:10px 14px; border-radius:50px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);" onkeydown="if(event.key==='Enter') addInlineComment(this.nextElementSibling)">
+                        <button class="btn" style="border-radius:50px; padding:10px 18px;" onclick="addInlineComment(this)">${localStorage.getItem('site_lang') === 'en' ? 'Add' : 'إضافة'}</button>
+                    </div>
+                    <div class="comments-list"></div>
+                </div>
+            `;
+            welcomeBar.insertAdjacentElement('afterend', div);
+        });
+    });
+
+    function handleSave(btn) {
+        let lang = localStorage.getItem('site_lang') || 'ar';
+        showToast(lang === 'ar' ? '✅ تم حفظ المنشور!' : '✅ Post saved!', 'success');
+    }
+    </script>
     <script src="../shared.js"></script>
 </body>
 </html>

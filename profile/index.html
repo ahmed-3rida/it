@@ -3,75 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Forum</title>
+    <title>Social Forum - الملف الشخصي</title>
     <link rel="stylesheet" href="../shared.css">
+    <style>
+        .profile-banner {
+            height: 140px;
+            border-radius: 12px 12px 0 0;
+            background: linear-gradient(135deg, #0079d3 0%, #7e57c2 100%);
+            position: relative;
+        }
+        .profile-avatar-wrap {
+            position: absolute;
+            bottom: -40px;
+            right: 24px;
+        }
+        html[dir="ltr"] .profile-avatar-wrap { right: auto; left: 24px; }
+        .profile-avatar {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: var(--card-bg);
+            border: 4px solid var(--card-bg);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; font-weight: 900; color: white;
+            overflow: hidden;
+        }
+        .profile-info { padding: 52px 24px 20px; }
+        .stats-row { display: flex; gap: 24px; margin: 16px 0; }
+        .stat-item { text-align: center; }
+        .stat-item strong { display: block; font-size: 20px; font-weight: 900; }
+        .stat-item span { font-size: 13px; color: var(--text-secondary); }
+    </style>
 </head>
 <body>
     <header class="navbar">
         <div class="logo">Social Forum</div>
-        <div class="search-bar" style="display:flex; flex-grow:1; max-width:400px; margin: 0 20px;">
-            <input type="text" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'">
+        <div class="search-bar">
+            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'" readonly>
         </div>
-        <nav class="nav-links" style="display: flex; align-items: center; gap: 10px;">
+        <nav class="nav-links">
             <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
             <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
-            <button onclick="toggleLang(event)" class="btn btn-secondary" style="padding: 5px 10px; font-size: 14px;" data-ar="English" data-en="العربية">English</button>
-            <a href="../login_register/index.html" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+            <button onclick="toggleLang(event)" class="lang-btn" data-ar="English" data-en="العربية">English</button>
+            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
         </nav>
     </header>
+
     <div class="layout-container">
         <aside class="global-sidebar">
             <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
             <ul>
-                <li><a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                <li><a href="../search/index.html" data-ar="البحث" data-en="Search">البحث</a></li>
-                <li><a href="../create_post/index.html" data-ar="إنشاء منشور" data-en="Create Post">إنشاء منشور</a></li>
-                <li><a href="../chat/index.html" data-ar="المحادثات" data-en="Chat">المحادثات</a></li>
-                <li><a href="../categories/index.html" data-ar="الأقسام" data-en="Categories">الأقسام</a></li>
-                <li><a href="../trending/index.html" data-ar="الشائع" data-en="Trending">الشائع</a></li>
-                <li><a href="../polls/index.html" data-ar="الاستطلاعات" data-en="Polls">الاستطلاعات</a></li>
+                <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
+                <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
+                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
+                <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
+                <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
+                <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
+                <li><a href="../polls/index.html" data-ar="📊 الاستطلاعات" data-en="📊 Polls">📊 الاستطلاعات</a></li>
             </ul>
-            <h3 style="margin-top:20px;" data-ar="الإعدادات والتحكم" data-en="Settings">الإعدادات والتحكم</h3>
+            <h3 style="margin-top:4px;" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
             <ul>
-                <li><a href="../user_dashboard/index.html" data-ar="لوحة تحكمي" data-en="Dashboard">لوحة تحكمي</a></li>
-                <li><a href="../admin_dashboard/index.html" data-ar="لوحة الإدارة" data-en="Admin">لوحة الإدارة</a></li>
-                <li><a href="../moderation/index.html" data-ar="الإبلاغ والحظر" data-en="Moderation">الإبلاغ والحظر</a></li>
-                <li><a href="../create_thread/index.html" data-ar="نقاش جديد" data-en="New Thread">نقاش جديد</a></li>
-                <li><a href="../notifications/index.html" data-ar="الإشعارات" data-en="Notifications">الإشعارات</a></li>
-                <li><a href="../ads/index.html" data-ar="الإعلانات" data-en="Ads">الإعلانات</a></li>
-                <li><a href="../privacy_settings/index.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a></li>
+                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a></li>
+                <li><a href="../moderation/index.html" data-ar="⚠️ الإبلاغ" data-en="⚠️ Moderation">⚠️ الإبلاغ</a></li>
+                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔 الإشعارات</a></li>
+                <li><a href="../ads/index.html" data-ar="📢 الإعلانات" data-en="📢 Ads">📢 الإعلانات</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a></li>
             </ul>
         </aside>
-        <main class="main-content">
-            <div class="container-box" style="text-align:center;">
-                <img src="https://via.placeholder.com/120" style="border-radius:50%; margin-bottom:15px;">
-                <h2 class="accent-title" style="margin-bottom:5px;" data-ar="أحمد محمد" data-en="Ahmed Mohamed">أحمد محمد</h2>
-                <p style="color:var(--text-secondary); margin-top:0;">@ahmed_m</p>
-                <p data-ar="مطور ويب مهتم بالتقنية." data-en="Web developer interested in tech.">مطور ويب مهتم بالتقنية.</p>
-                <div style="margin:20px 0;">
-                    <span style="margin:0 10px;"><strong style="color:var(--text-primary)">150</strong> <span data-ar="متابع" data-en="Followers">متابع</span></span>
-                    <span style="margin:0 10px;"><strong style="color:var(--text-primary)">50</strong> <span data-ar="يُتابع" data-en="Following">يُتابع</span></span>
-                </div>
-                <button class="btn" id="followBtn" onclick="toggleFollow()" data-ar="متابعة" data-en="Follow">متابعة</button>
-                <a href="../edit_profile/index.html" class="btn btn-secondary" data-ar="تعديل الملف" data-en="Edit Profile">تعديل الملف</a>
-                <script>
-                function toggleFollow() {
-                    let btn = document.getElementById('followBtn');
-                    let lang = localStorage.getItem('site_lang') || 'ar';
-                    let isAr = (lang === 'ar');
-                    let followText = isAr ? 'متابعة' : 'Follow';
-                    let unfollowText = isAr ? 'إلغاء المتابعة' : 'Unfollow';
 
-                    if(btn.innerText === followText) {
-                        btn.innerText = unfollowText; btn.className = 'btn btn-secondary';
-                    } else {
-                        btn.innerText = followText; btn.className = 'btn';
-                    }
-                }
-                </script>
+        <main class="main-content">
+            <div class="container-box" style="padding:0; overflow:hidden;">
+                <div class="profile-banner">
+                    <div class="profile-avatar-wrap">
+                        <div class="profile-avatar" id="profileAvatar" style="background: linear-gradient(135deg, #0079d3, #7e57c2);">
+                            <span id="profileAvatarInitial">?</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+                        <div>
+                            <h2 style="margin:0 0 4px; font-size:22px;" id="profileName">المستخدم</h2>
+                            <p style="color:var(--text-secondary); margin:0; font-size:14px;" id="profileHandle">@user</p>
+                        </div>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <button class="btn" id="followBtn" onclick="toggleFollowProfile(this)" data-ar="+ متابعة" data-en="+ Follow">+ متابعة</button>
+                            <a href="../edit_profile/index.html" class="btn btn-secondary" data-ar="تعديل الملف" data-en="Edit Profile">تعديل الملف</a>
+                        </div>
+                    </div>
+                    <p style="margin:14px 0; color:var(--text-secondary); line-height:1.6;" data-ar="مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع." data-en="Web developer passionate about technology. Love sharing knowledge with the community.">مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع.</p>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <strong>24</strong>
+                            <span data-ar="منشور" data-en="Posts">منشور</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>150</strong>
+                            <span data-ar="متابع" data-en="Followers">متابع</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>50</strong>
+                            <span data-ar="يُتابع" data-en="Following">يُتابع</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent posts -->
+            <div class="container-box">
+                <h3 data-ar="آخر المنشورات" data-en="Recent Posts">آخر المنشورات</h3>
+                <div class="post" style="margin-bottom:0;">
+                    <h4 style="margin:0 0 6px;" data-ar="هل تعلم أن JavaScript تم ابتكارها في 10 أيام؟" data-en="Did you know JavaScript was created in 10 days?">هل تعلم أن JavaScript تم ابتكارها في 10 أيام؟</h4>
+                    <p style="margin:0; color:var(--text-secondary); font-size:14px;" data-ar="تم تصميم اللغة في عام 1995 من قِبل بريندان آيك..." data-en="The language was designed in 1995 by Brendan Eich...">تم تصميم اللغة في عام 1995 من قِبل بريندان آيك...</p>
+                    <div class="post-actions">
+                        <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span class="like-count">42</span></button>
+                        <button class="action-btn">💬 <span>8</span></button>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let name = localStorage.getItem('username') || 'مستخدم';
+        document.getElementById('profileName').innerText = name;
+        document.getElementById('profileHandle').innerText = '@' + name.toLowerCase().replace(/\s+/g, '_');
+        let initial = name.charAt(0).toUpperCase();
+        document.getElementById('profileAvatarInitial').innerText = initial || '?';
+    });
+
+    function toggleFollowProfile(btn) {
+        let lang = localStorage.getItem('site_lang') || 'ar';
+        let followText = lang === 'ar' ? '+ متابعة' : '+ Follow';
+        let unfollowText = lang === 'ar' ? 'إلغاء المتابعة' : 'Unfollow';
+        if(btn.innerText.trim() === followText) {
+            btn.innerText = unfollowText; btn.className = 'btn btn-secondary';
+            showToast(lang === 'ar' ? 'تمت المتابعة!' : 'Followed!', 'success');
+        } else {
+            btn.innerText = followText; btn.className = 'btn';
+            showToast(lang === 'ar' ? 'تم إلغاء المتابعة' : 'Unfollowed', 'info');
+        }
+    }
+    </script>
     <script src="../shared.js"></script>
 </body>
 </html>
