@@ -1,0 +1,15 @@
+# Python files
+*.py
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+venv/
+env/
+ENV/
