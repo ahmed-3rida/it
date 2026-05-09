@@ -179,6 +179,6 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 
 **Developed for HNU University — Semester 4 Project** 🎓
 
-<sub>Made with ❤️ by the Social Forum Team</sub>
+<sub>Made with ❤️ by the UniSkills Social Team</sub>
 
 </div>

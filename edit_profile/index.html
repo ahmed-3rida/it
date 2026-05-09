@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Forum</title>
+    <title>UniSkills Social</title>
+    <link rel="icon" type="image/x-icon" href="../images/uniskills-logo.ico">
     <link rel="stylesheet" href="../shared.css">
-    
+
 </head>
+
 <body>
-        <header class="navbar">
-        <div class="logo">Social Forum</div>
+    <header class="navbar">
+        <div class="logo">UniSkills Social</div>
         <div class="search-bar">
-            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'" readonly>
+            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..."
+                data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..."
+                onclick="window.location.href='../search/index.html'" readonly>
         </div>
         <nav class="nav-links">
             <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
             <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
             <button onclick="toggleLang(event)" class="lang-btn" data-ar="English" data-en="العربية">English</button>
-            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل"
+                data-en="Login/Register">دخول/تسجيل</a>
         </nav>
     </header>
     <div class="layout-container">
-                <aside class="global-sidebar">
+        <aside class="global-sidebar">
             <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
             <ul>
                 <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
                 <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
-                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
-                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء نقاش</a></li>
+                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء
+                        منشور</a></li>
+                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء
+                        نقاش</a></li>
                 <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
                 <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
                 <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
@@ -35,12 +43,16 @@
             </ul>
             <h3 style="margin-top:4px;" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
             <ul>
-                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة تحكمي</a></li>
-                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a></li>
+                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة
+                        تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a>
+                </li>
                 <li><a href="../moderation/index.html" data-ar="⚠️ الإبلاغ" data-en="⚠️ Moderation">⚠️ الإبلاغ</a></li>
-                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔 الإشعارات</a></li>
+                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔
+                        الإشعارات</a></li>
                 <li><a href="../ads/index.html" data-ar="📢 الإعلانات" data-en="📢 Ads">📢 الإعلانات</a></li>
-                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a>
+                </li>
             </ul>
         </aside>
         <main class="main-content">
@@ -48,7 +60,9 @@
                 <h2 class="accent-title" data-ar="تعديل الملف الشخصي" data-en="Edit Profile">تعديل الملف الشخصي</h2>
                 <form onsubmit="handleEditSubmit(event)">
                     <div style="text-align: center; margin-bottom: 20px;">
-                        <div id="editAvatar" style="width:100px; height:100px; border-radius:50%; background: linear-gradient(135deg, #0079d3, #7e57c2); margin: 0 auto; display:flex; align-items:center; justify-content:center; color:white; font-size:40px; font-weight:bold;">?</div>
+                        <div id="editAvatar"
+                            style="width:100px; height:100px; border-radius:50%; background: linear-gradient(135deg, #0079d3, #7e57c2); margin: 0 auto; display:flex; align-items:center; justify-content:center; color:white; font-size:40px; font-weight:bold;">
+                            ?</div>
                         <div class="form-group" style="margin-top: 15px;">
                             <input type="file" accept="image/*">
                         </div>
@@ -59,17 +73,19 @@
                     </div>
                     <div class="form-group">
                         <label data-ar="نبذة عني (Bio)" data-en="Bio">نبذة عني (Bio)</label>
-                        <textarea id="editBio" rows="3" data-ar-placeholder="اكتب نبذة عنك..." data-en-placeholder="Write your bio..." placeholder="اكتب نبذة عنك..."></textarea>
+                        <textarea id="editBio" rows="3" data-ar-placeholder="اكتب نبذة عنك..."
+                            data-en-placeholder="Write your bio..." placeholder="اكتب نبذة عنك..."></textarea>
                     </div>
-                    <button type="submit" class="btn" id="editSubmitBtn" data-ar="حفظ التعديلات" data-en="Save Changes">حفظ التعديلات</button>
+                    <button type="submit" class="btn" id="editSubmitBtn" data-ar="حفظ التعديلات"
+                        data-en="Save Changes">حفظ التعديلات</button>
                 </form>
             </div>
         </main>
     </div>
-    
+
     <script src="../shared.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
 
+</html>
 

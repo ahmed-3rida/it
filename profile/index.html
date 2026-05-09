@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Forum - الملف الشخصي</title>
+    <title>UniSkills Social - الملف الشخصي</title>
+    <link rel="icon" type="image/x-icon" href="../images/uniskills-logo.ico">
     <link rel="stylesheet" href="../shared.css">
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header class="navbar">
-        <div class="logo">Social Forum</div>
+        <div class="logo">UniSkills Social</div>
         <div class="search-bar">
-            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'" readonly>
+            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..."
+                data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..."
+                onclick="window.location.href='../search/index.html'" readonly>
         </div>
         <nav class="nav-links">
             <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
             <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
             <button onclick="toggleLang(event)" class="lang-btn" data-ar="English" data-en="العربية">English</button>
-            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل"
+                data-en="Login/Register">دخول/تسجيل</a>
         </nav>
     </header>
 
@@ -28,8 +34,10 @@
             <ul>
                 <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
                 <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
-                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
-                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء نقاش</a></li>
+                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء
+                        منشور</a></li>
+                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء
+                        نقاش</a></li>
                 <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
                 <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
                 <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
@@ -37,12 +45,16 @@
             </ul>
             <h3 style="margin-top:4px;" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
             <ul>
-                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة تحكمي</a></li>
-                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a></li>
+                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة
+                        تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a>
+                </li>
                 <li><a href="../moderation/index.html" data-ar="⚠️ الإبلاغ" data-en="⚠️ Moderation">⚠️ الإبلاغ</a></li>
-                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔 الإشعارات</a></li>
+                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔
+                        الإشعارات</a></li>
                 <li><a href="../ads/index.html" data-ar="📢 الإعلانات" data-en="📢 Ads">📢 الإعلانات</a></li>
-                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a>
+                </li>
             </ul>
         </aside>
 
@@ -50,23 +62,31 @@
             <div class="container-box" style="padding:0; overflow:hidden;">
                 <div class="profile-banner">
                     <div class="profile-avatar-wrap">
-                        <div class="profile-avatar" id="profileAvatar" style="background: linear-gradient(135deg, #0079d3, #7e57c2);">
+                        <div class="profile-avatar" id="profileAvatar"
+                            style="background: linear-gradient(135deg, #0079d3, #7e57c2);">
                             <span id="profileAvatarInitial">?</span>
                         </div>
                     </div>
                 </div>
                 <div class="profile-info">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+                    <div
+                        style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
                         <div>
                             <h2 style="margin:0 0 4px; font-size:22px;" id="profileName">المستخدم</h2>
-                            <p style="color:var(--text-secondary); margin:0; font-size:14px;" id="profileHandle">@user</p>
+                            <p style="color:var(--text-secondary); margin:0; font-size:14px;" id="profileHandle">@user
+                            </p>
                         </div>
                         <div style="display:flex; gap:10px; align-items:center;">
-                            <button class="btn" id="followBtn" onclick="toggleFollowProfile(this)" data-ar="+ متابعة" data-en="+ Follow">+ متابعة</button>
-                            <a href="../edit_profile/index.html" class="btn btn-secondary" data-ar="تعديل الملف" data-en="Edit Profile">تعديل الملف</a>
+                            <button class="btn" id="followBtn" onclick="toggleFollowProfile(this)" data-ar="+ متابعة"
+                                data-en="+ Follow">+ متابعة</button>
+                            <a href="../edit_profile/index.html" class="btn btn-secondary" data-ar="تعديل الملف"
+                                data-en="Edit Profile">تعديل الملف</a>
                         </div>
                     </div>
-                    <p style="margin:14px 0; color:var(--text-secondary); line-height:1.6;" id="profileBio" data-ar="مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع." data-en="Web developer passionate about technology. Love sharing knowledge with the community.">مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع.</p>
+                    <p style="margin:14px 0; color:var(--text-secondary); line-height:1.6;" id="profileBio"
+                        data-ar="مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع."
+                        data-en="Web developer passionate about technology. Love sharing knowledge with the community.">
+                        مطور ويب مهتم بالتقنية والبرمجة. أحب مشاركة المعرفة مع المجتمع.</p>
                     <div class="stats-row">
                         <div class="stat-item">
                             <strong id="postCountStat">0</strong>
@@ -98,6 +118,6 @@
     <script src="../shared.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
 
+</html>
 

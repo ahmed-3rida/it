@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Forum</title>
+    <title>UniSkills Social</title>
+    <link rel="icon" type="image/x-icon" href="../images/uniskills-logo.ico">
     <link rel="stylesheet" href="../shared.css">
-    
+
 </head>
+
 <body>
-        <header class="navbar">
-        <div class="logo">Social Forum</div>
+    <header class="navbar">
+        <div class="logo">UniSkills Social</div>
         <div class="search-bar">
-            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'" readonly>
+            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..."
+                data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..."
+                onclick="window.location.href='../search/index.html'" readonly>
         </div>
         <nav class="nav-links">
             <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
             <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
             <button onclick="toggleLang(event)" class="lang-btn" data-ar="English" data-en="العربية">English</button>
-            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل"
+                data-en="Login/Register">دخول/تسجيل</a>
         </nav>
     </header>
     <div class="layout-container">
-                <aside class="global-sidebar">
+        <aside class="global-sidebar">
             <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
             <ul>
                 <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
                 <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
-                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
-                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء نقاش</a></li>
+                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء
+                        منشور</a></li>
+                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء
+                        نقاش</a></li>
                 <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
                 <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
                 <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
@@ -35,46 +43,60 @@
             </ul>
             <h3 style="margin-top:4px;" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
             <ul>
-                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة تحكمي</a></li>
-                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a></li>
+                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة
+                        تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a>
+                </li>
                 <li><a href="../moderation/index.html" data-ar="⚠️ الإبلاغ" data-en="⚠️ Moderation">⚠️ الإبلاغ</a></li>
-                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔 الإشعارات</a></li>
+                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔
+                        الإشعارات</a></li>
                 <li><a href="../ads/index.html" data-ar="📢 الإعلانات" data-en="📢 Ads">📢 الإعلانات</a></li>
-                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a>
+                </li>
             </ul>
         </aside>
         <main class="main-content">
             <div class="container-box">
                 <h2 class="accent-title" data-ar="المحادثات المباشرة" data-en="Live Chat">المحادثات المباشرة</h2>
-                <div style="display: flex; height: 400px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                <div
+                    style="display: flex; height: 400px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
                     <!-- جهات الاتصال -->
-                    <div id="contactList" style="width: 30%; border-left: 1px solid var(--border-color); background: var(--bg-color); overflow-y: auto;">
-                        <div class="chat-contact active" onclick="switchChat('Ahmed Mohamed', this)" style="padding: 15px; border-bottom: 1px solid var(--border-color); cursor: pointer; background: var(--hover-bg);">
+                    <div id="contactList"
+                        style="width: 30%; border-left: 1px solid var(--border-color); background: var(--bg-color); overflow-y: auto;">
+                        <div class="chat-contact active" onclick="switchChat('Ahmed Mohamed', this)"
+                            style="padding: 15px; border-bottom: 1px solid var(--border-color); cursor: pointer; background: var(--hover-bg);">
                             <strong data-ar="أحمد محمد" data-en="Ahmed Mohamed">أحمد محمد</strong>
                         </div>
-                        <div class="chat-contact" onclick="switchChat('Sara Ali', this)" style="padding: 15px; border-bottom: 1px solid var(--border-color); cursor: pointer;">
+                        <div class="chat-contact" onclick="switchChat('Sara Ali', this)"
+                            style="padding: 15px; border-bottom: 1px solid var(--border-color); cursor: pointer;">
                             <strong data-ar="سارة علي" data-en="Sara Ali">سارة علي</strong>
                         </div>
                     </div>
                     <!-- نافذة المحادثة -->
                     <div style="width: 70%; display: flex; flex-direction: column; background: var(--card-bg);">
-                        <div id="activeChatTitle" style="padding: 15px; border-bottom: 1px solid var(--border-color); font-weight: bold;" data-ar="أحمد محمد" data-en="Ahmed Mohamed">أحمد محمد</div>
-                        <div id="chatMessages" style="flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                        <div id="activeChatTitle"
+                            style="padding: 15px; border-bottom: 1px solid var(--border-color); font-weight: bold;"
+                            data-ar="أحمد محمد" data-en="Ahmed Mohamed">أحمد محمد</div>
+                        <div id="chatMessages"
+                            style="flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
                             <!-- الرسائل تظهر هنا -->
                         </div>
-                        <div style="padding: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px;">
-                            <input type="text" id="msgInput" data-ar-placeholder="اكتب رسالة..." data-en-placeholder="Type a message..." placeholder="اكتب رسالة..." style="flex-grow: 1; padding: 10px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary);">
+                        <div
+                            style="padding: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px;">
+                            <input type="text" id="msgInput" data-ar-placeholder="اكتب رسالة..."
+                                data-en-placeholder="Type a message..." placeholder="اكتب رسالة..."
+                                style="flex-grow: 1; padding: 10px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-primary);">
                             <button class="btn" onclick="sendMessage()" data-ar="إرسال" data-en="Send">إرسال</button>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </main>
     </div>
     <script src="../shared.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
 
+</html>
 

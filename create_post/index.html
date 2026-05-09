@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Forum</title>
+    <title>UniSkills Social</title>
+    <link rel="icon" type="image/x-icon" href="../images/uniskills-logo.ico">
     <link rel="stylesheet" href="../shared.css">
-    
+
 </head>
+
 <body>
-        <header class="navbar">
-        <div class="logo">Social Forum</div>
+    <header class="navbar">
+        <div class="logo">UniSkills Social</div>
         <div class="search-bar">
-            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..." data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..." onclick="window.location.href='../search/index.html'" readonly>
+            <input type="text" id="navSearch" data-ar-placeholder="البحث في المنتدى..."
+                data-en-placeholder="Search forum..." placeholder="البحث في المنتدى..."
+                onclick="window.location.href='../search/index.html'" readonly>
         </div>
         <nav class="nav-links">
             <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
             <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
             <button onclick="toggleLang(event)" class="lang-btn" data-ar="English" data-en="العربية">English</button>
-            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل" data-en="Login/Register">دخول/تسجيل</a>
+            <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل"
+                data-en="Login/Register">دخول/تسجيل</a>
         </nav>
     </header>
     <div class="layout-container">
-                <aside class="global-sidebar">
+        <aside class="global-sidebar">
             <h3 data-ar="القائمة الرئيسية" data-en="Main Menu">القائمة الرئيسية</h3>
             <ul>
                 <li><a href="../home/index.html" data-ar="🏠 الرئيسية" data-en="🏠 Home">🏠 الرئيسية</a></li>
                 <li><a href="../search/index.html" data-ar="🔍 البحث" data-en="🔍 Search">🔍 البحث</a></li>
-                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء منشور</a></li>
-                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء نقاش</a></li>
+                <li><a href="../create_post/index.html" data-ar="✏️ إنشاء منشور" data-en="✏️ Create Post">✏️ إنشاء
+                        منشور</a></li>
+                <li><a href="../create_thread/index.html" data-ar="🧵 إنشاء نقاش" data-en="🧵 Create Thread">🧵 إنشاء
+                        نقاش</a></li>
                 <li><a href="../chat/index.html" data-ar="💬 المحادثات" data-en="💬 Chat">💬 المحادثات</a></li>
                 <li><a href="../categories/index.html" data-ar="📂 الأقسام" data-en="📂 Categories">📂 الأقسام</a></li>
                 <li><a href="../trending/index.html" data-ar="🔥 الشائع" data-en="🔥 Trending">🔥 الشائع</a></li>
@@ -35,12 +43,16 @@
             </ul>
             <h3 style="margin-top:4px;" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
             <ul>
-                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة تحكمي</a></li>
-                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a></li>
+                <li><a href="../user_dashboard/index.html" data-ar="⚙️ لوحة تحكمي" data-en="⚙️ Dashboard">⚙️ لوحة
+                        تحكمي</a></li>
+                <li><a href="../admin_dashboard/index.html" data-ar="🛡️ الإدارة" data-en="🛡️ Admin">🛡️ الإدارة</a>
+                </li>
                 <li><a href="../moderation/index.html" data-ar="⚠️ الإبلاغ" data-en="⚠️ Moderation">⚠️ الإبلاغ</a></li>
-                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔 الإشعارات</a></li>
+                <li><a href="../notifications/index.html" data-ar="🔔 الإشعارات" data-en="🔔 Notifications">🔔
+                        الإشعارات</a></li>
                 <li><a href="../ads/index.html" data-ar="📢 الإعلانات" data-en="📢 Ads">📢 الإعلانات</a></li>
-                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a></li>
+                <li><a href="../privacy_settings/index.html" data-ar="🔒 الخصوصية" data-en="🔒 Privacy">🔒 الخصوصية</a>
+                </li>
             </ul>
         </aside>
         <main class="main-content">
@@ -49,22 +61,28 @@
                 <form onsubmit="handlePostSubmit(event)">
                     <div class="form-group">
                         <label data-ar="عنوان المنشور" data-en="Post Title">عنوان المنشور</label>
-                        <input type="text" data-ar-placeholder="اكتب عنواناً..." data-en-placeholder="Write title..." placeholder="اكتب عنواناً..." required>
+                        <input type="text" data-ar-placeholder="اكتب عنواناً..." data-en-placeholder="Write title..."
+                            placeholder="اكتب عنواناً..." required>
                     </div>
                     <div class="form-group">
                         <label data-ar="المحتوى" data-en="Content">المحتوى</label>
-                        <textarea rows="5" data-ar-placeholder="ماذا يدور في ذهنك؟" data-en-placeholder="What's on your mind?" placeholder="ماذا يدور في ذهنك؟"></textarea>
+                        <textarea rows="5" data-ar-placeholder="ماذا يدور في ذهنك؟"
+                            data-en-placeholder="What's on your mind?" placeholder="ماذا يدور في ذهنك؟"></textarea>
                     </div>
                     <div class="form-group">
-                        <label data-ar="إرفاق وسائط (صورة / فيديو)" data-en="Attach Media">إرفاق وسائط (صورة / فيديو)</label>
+                        <label data-ar="إرفاق وسائط (صورة / فيديو)" data-en="Attach Media">إرفاق وسائط (صورة /
+                            فيديو)</label>
                         <input type="file" accept="image/*,video/*">
                     </div>
                     <div class="form-group">
                         <label data-ar="القسم" data-en="Category">القسم</label>
-                        <select id="postCategory" style="width:100%; padding:10px; border-radius:4px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
-                            <option value="Programming" data-ar="💻 برمجة وتطوير" data-en="💻 Programming">💻 برمجة وتطوير</option>
+                        <select id="postCategory"
+                            style="width:100%; padding:10px; border-radius:4px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
+                            <option value="Programming" data-ar="💻 برمجة وتطوير" data-en="💻 Programming">💻 برمجة
+                                وتطوير</option>
                             <option value="Gaming" data-ar="🎮 ألعاب فيديو" data-en="🎮 Gaming">🎮 ألعاب فيديو</option>
-                            <option value="Smartphones" data-ar="📱 هواتف ذكية" data-en="📱 Smartphones">📱 هواتف ذكية</option>
+                            <option value="Smartphones" data-ar="📱 هواتف ذكية" data-en="📱 Smartphones">📱 هواتف ذكية
+                            </option>
                         </select>
                     </div>
                     <button type="submit" class="btn" id="postSubmitBtn" data-ar="نشر" data-en="Post">نشر</button>
@@ -72,10 +90,10 @@
             </div>
         </main>
     </div>
-    
+
     <script src="../shared.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
 
+</html>
 

@@ -34,6 +34,7 @@
 
         let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
         let savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
+        let allComments = JSON.parse(localStorage.getItem('allComments') || '{}');
 
         // Use a container or insert in reverse to keep newest at top
         // Let's iterate in reverse (Oldest to Newest) so 'afterend' puts Newest at the top
@@ -50,6 +51,7 @@
                 
                 let isLiked = likedPosts.find(p => p.id === String(item.id));
                 let isSaved = savedPosts.find(p => p.id === String(item.id));
+                let postComments = allComments[item.id] || [];
                 
                 div.innerHTML = `
                     <div class="post-header">
@@ -66,7 +68,7 @@
                     ${item.media ? `<img src="${item.media}" style="width:100%; border-radius:10px; max-height:400px; object-fit:cover; margin-top:10px;">` : ''}
                     <div class="post-actions">
                         <button class="action-btn ${isLiked ? 'liked' : ''}" style="${isLiked ? 'color:var(--accent);' : ''}" onclick="toggleLikeGlobal(this)">👍 <span>${lang === 'en' ? 'Like' : 'أعجبني'}</span> (<span class="like-count">${isLiked ? 1 : 0}</span>)</button>
-                        <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span>${lang === 'en' ? 'Comment' : 'تعليق'}</span> (<span class="comment-count">0</span>)</button>
+                        <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span>${lang === 'en' ? 'Comment' : 'تعليق'}</span> (<span class="comment-count">${postComments.length}</span>)</button>
                         <button class="action-btn ${isSaved ? 'saved' : ''}" style="${isSaved ? 'color:var(--accent);' : ''}" onclick="toggleSaveGlobal(this)">🔖 <span>${lang === 'en' ? 'Save' : 'حفظ'}</span></button>
                     </div>
                     <div class="comment-section" style="display:none;">
@@ -77,6 +79,11 @@
                         <div class="comments-list"></div>
                     </div>
                 `;
+                
+                // Render existing comments
+                let list = div.querySelector('.comments-list');
+                postComments.forEach(c => renderSingleComment(list, c, lang));
+
             } else {
                 // Poll rendering
                 let totalVotes = item.options.reduce((sum, opt) => sum + opt.votes, 0);
@@ -240,52 +247,76 @@ function toggleCommentSection(btn) {
 }
 
 function addInlineComment(btn) {
-    let section = btn.closest('.comment-section');
+    let post = btn.closest('.post');
+    let postId = post.getAttribute('data-post-id');
+    let section = post.querySelector('.comment-section');
     let input = section.querySelector('input[type="text"]');
     let list = section.querySelector('.comments-list');
-    let countSpan = btn.closest('.post').querySelector('.comment-count');
+    let countSpan = post.querySelector('.comment-count');
     
     if (!input || input.value.trim() === '') return;
     
     let lang = localStorage.getItem('site_lang') || 'ar';
     let youText = (lang === 'en') ? 'You' : 'أنت';
-    let deleteText = (lang === 'en') ? 'Delete' : 'حذف';
     let username = localStorage.getItem('username') || youText;
     
+    let newComment = {
+        id: Date.now(),
+        author: username,
+        text: input.value.trim()
+    };
+
+    // Save to localStorage
+    let allComments = JSON.parse(localStorage.getItem('allComments') || '{}');
+    if (!allComments[postId]) allComments[postId] = [];
+    allComments[postId].push(newComment);
+    localStorage.setItem('allComments', JSON.stringify(allComments));
+
+    renderSingleComment(list, newComment, lang);
+    
+    if(countSpan) countSpan.innerText = allComments[postId].length;
+    input.value = '';
+    input.focus();
+}
+
+function renderSingleComment(container, comment, lang) {
+    let deleteText = (lang === 'en') ? 'Delete' : 'حذف';
     let div = document.createElement('div');
     div.className = 'comment-item';
+    div.setAttribute('data-comment-id', comment.id);
     div.style.cssText = 'background: var(--bg-color); padding: 10px 14px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; animation: slideDown 0.2s ease;';
     
     div.innerHTML = `
         <div style="display:flex; align-items:center; gap:10px;">
             <div style="width:32px; height:32px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:bold; color:white; flex-shrink:0;">
-                ${(username.charAt(0) || '?').toUpperCase()}
+                ${(comment.author.charAt(0) || '?').toUpperCase()}
             </div>
             <div>
-                <strong style="color:var(--accent); font-size:13px;">${username}</strong>
-                <p style="margin:2px 0 0; font-size:14px;">${input.value}</p>
+                <strong style="color:var(--accent); font-size:13px;">${comment.author}</strong>
+                <p style="margin:2px 0 0; font-size:14px;">${comment.text}</p>
             </div>
         </div>
         <button class="btn" style="padding: 4px 10px; font-size: 12px; background: rgba(231,76,60,0.2); color:#ef4444; border:1px solid rgba(231,76,60,0.3);" onclick="deleteInlineComment(this)">${deleteText}</button>
     `;
-    
-    list.prepend(div);
-    if(countSpan) countSpan.innerText = parseInt(countSpan.innerText) + 1;
-    input.value = '';
-    input.focus();
+    container.prepend(div);
 }
 
 function deleteInlineComment(btn) {
     let post = btn.closest('.post');
-    let countSpan = post ? post.querySelector('.comment-count') : null;
-    let item = btn.closest('.comment-item');
-    item.style.opacity = '0';
-    item.style.transition = 'opacity 0.2s';
-    setTimeout(() => {
-        item.remove();
-        if(countSpan) {
-            let c = parseInt(countSpan.innerText);
-            countSpan.innerText = Math.max(0, c - 1);
-        }
-    }, 200);
+    let postId = post.getAttribute('data-post-id');
+    let commentItem = btn.closest('.comment-item');
+    let commentId = commentItem.getAttribute('data-comment-id');
+    let countSpan = post.querySelector('.comment-count');
+
+    // Remove from localStorage
+    let allComments = JSON.parse(localStorage.getItem('allComments') || '{}');
+    if (allComments[postId]) {
+        allComments[postId] = allComments[postId].filter(c => String(c.id) !== String(commentId));
+        localStorage.setItem('allComments', JSON.stringify(allComments));
+        if(countSpan) countSpan.innerText = allComments[postId].length;
+    }
+
+    commentItem.style.opacity = '0';
+    commentItem.style.transition = 'opacity 0.2s';
+    setTimeout(() => commentItem.remove(), 200);
 }
