@@ -1,4 +1,4 @@
-// جميع الـ functions المشتركة (like, save, follow, comment) موجودة في shared.js
+
 
 document.addEventListener("DOMContentLoaded", function() {
     let name = localStorage.getItem('username') || 'مستخدم';
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Load recent posts
+
     let myPosts = JSON.parse(localStorage.getItem('myPosts') || '[]');
     let postCountStat = document.getElementById('postCountStat');
     if (postCountStat) postCountStat.innerText = myPosts.length;

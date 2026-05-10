@@ -1,7 +1,4 @@
-// جميع الـ functions المشتركة (like, save, follow, comment) موجودة في shared.js
-
 document.addEventListener("DOMContentLoaded", function() {
-    // تنظيف المنشورات القديمة لمنع التكرار مع الـ HTML الثابت
     let currentPosts = JSON.parse(localStorage.getItem('myPosts') || '[]');
     localStorage.setItem('myPosts', JSON.stringify(
         currentPosts.filter(p => !p.title.includes("UniSkills Social!") && !p.title.includes("كيف تبدأ في تعلم"))
@@ -12,12 +9,10 @@ document.addEventListener("DOMContentLoaded", function() {
         currentPolls.filter(p => !p.question.includes("ما هي لغة البرمجة") && !p.question.includes("ما هو الهاتف الذكي"))
     ));
 
-    // تحديث أفاتار المستخدم في الـ welcome bar
     let name = localStorage.getItem('username') || '';
     let avatarEl = document.getElementById('homeUserAvatar');
     if (name && avatarEl) avatarEl.innerText = name.charAt(0).toUpperCase();
 
-    // تحميل المنشورات والاستطلاعات الديناميكية من localStorage
     let lang = localStorage.getItem('site_lang') || 'ar';
     let myPosts = JSON.parse(localStorage.getItem('myPosts') || '[]').map(p => ({...p, type: 'post'}));
     let customPolls = JSON.parse(localStorage.getItem('customPolls') || '[]').map(p => ({...p, type: 'poll'}));
@@ -25,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let welcomeBar = document.getElementById('mainWelcomeBar');
 
-    // فلترة حسب الفئة إن وُجدت
     let urlParams = new URLSearchParams(window.location.search);
     let currentCategory = urlParams.get('category');
     if (currentCategory) {
@@ -44,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
     let allComments = JSON.parse(localStorage.getItem('allComments') || '{}');
 
-    // إدراج من الأقدم للأحدث حتى يظهر الأحدث في الأعلى
     [...combinedFeed].reverse().forEach(item => {
         let div = document.createElement('div');
         div.className = 'post';
@@ -83,12 +76,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             `;
 
-            // عرض التعليقات الموجودة
             let list = div.querySelector('.comments-list');
             postComments.forEach(c => renderSingleComment(list, c, lang));
 
         } else {
-            // استطلاع
             let totalVotes = item.options.reduce((sum, opt) => sum + opt.votes, 0);
             let hasVoted = localStorage.getItem('voted_' + item.id) === 'true';
             let formHtml = '', resultsHtml = '';

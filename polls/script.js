@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
             function loadPolls() {
                 let saved = JSON.parse(localStorage.getItem('customPolls') || '[]');
                 let container = document.getElementById('pollsList');
-                // clear old custom ones
+
                 let customPosts = container.querySelectorAll('.custom-poll');
                 customPosts.forEach(p => p.remove());
 
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 saved = saved.filter(p => p.id !== pollId);
                 localStorage.setItem('customPolls', JSON.stringify(saved));
                 
-                // Also remove vote status
+
                 localStorage.removeItem('voted_' + pollId);
                 
                 showToast(lang === 'ar' ? 'تم حذف الاستطلاع' : 'Poll deleted', 'info');
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     poll.options[parseInt(selectedIdx)].votes += 1;
                     localStorage.setItem('customPolls', JSON.stringify(saved));
                     localStorage.setItem('voted_' + pollId, 'true');
-                    loadPolls(); // Re-render to show updated percentages
+                    loadPolls();
                 }
             }
 

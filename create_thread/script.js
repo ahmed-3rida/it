@@ -32,7 +32,7 @@ function handleThreadSubmit(event) {
     let posts = JSON.parse(localStorage.getItem('myPosts') || '[]');
     let currentUsername = localStorage.getItem('username') || '';
     
-    // A thread is basically a text post, we can prefix the title to distinguish if we want, or just save it as is.
+
     posts.push({ 
         id: Date.now(), 
         title: '🧵 ' + title, 

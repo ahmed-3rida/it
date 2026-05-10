@@ -21,7 +21,6 @@ function toggleLang(e) {
     changeLanguage(newLang);
 }
 
-// ===== الوضع الصباحي والمسائي (Dark/Light Mode) =====
 function toggleTheme() {
     const isLight = document.body.classList.toggle('light-mode');
     localStorage.setItem('site_theme', isLight ? 'light' : 'dark');
@@ -45,26 +44,22 @@ function applyLanguage(lang) {
         document.documentElement.dir = 'rtl';
     }
 
-    // ترجمة النصوص العادية
     document.querySelectorAll('[data-ar]').forEach(el => {
         let text = (lang === 'en' && el.getAttribute('data-en')) ? el.getAttribute('data-en') : el.getAttribute('data-ar');
         if (text) el.innerText = text;
     });
 
-    // ترجمة الـ Placeholders
     document.querySelectorAll('[data-ar-placeholder]').forEach(el => {
         let ph = (lang === 'en' && el.getAttribute('data-en-placeholder')) ? el.getAttribute('data-en-placeholder') : el.getAttribute('data-ar-placeholder');
         if (ph) el.placeholder = ph;
     });
 
-    // ترجمة عنوان الصفحة (Title)
     let titleEl = document.querySelector('title[data-ar]');
     if (titleEl) {
         document.title = (lang === 'en' && titleEl.getAttribute('data-en')) ? titleEl.getAttribute('data-en') : titleEl.getAttribute('data-ar');
     }
 }
 
-// ===== Auth في الـ Navbar =====
 function updateAuthNav() {
     let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     let lang = localStorage.getItem('site_lang') || 'ar';
@@ -98,7 +93,6 @@ function updateAuthNav() {
     });
 }
 
-// ===== تحديد الرابط النشط في الـ Sidebar =====
 function markActiveNav() {
     let currentPath = window.location.pathname;
     document.querySelectorAll('.global-sidebar ul li a').forEach(link => {
@@ -108,7 +102,6 @@ function markActiveNav() {
     });
 }
 
-// ===== تحميل avatar المستخدم =====
 function loadUserAvatar() {
     let avatarEl = document.getElementById('navUserAvatar');
     if(!avatarEl) return;
@@ -118,7 +111,6 @@ function loadUserAvatar() {
 }
 
 function generateAvatar(name) {
-    // رسم حرف أول على خلفية ملونة
     let canvas = document.createElement('canvas');
     canvas.width = 40; canvas.height = 40;
     let ctx = canvas.getContext('2d');
@@ -134,7 +126,6 @@ function generateAvatar(name) {
     return canvas.toDataURL();
 }
 
-// ===== Toast Notifications =====
 function showToast(message, type='success') {
     let existing = document.getElementById('global-toast');
     if(existing) existing.remove();
@@ -165,7 +156,6 @@ function showToast(message, type='success') {
     }, 3000);
 }
 
-// ===== حساب الوقت المنقضي (Time Ago) =====
 function timeAgo(timestamp) {
     if (!timestamp) return '';
     let lang = localStorage.getItem('site_lang') || 'ar';
@@ -202,7 +192,6 @@ function timeAgo(timestamp) {
     return lang === 'en' ? 'Just now' : 'الآن';
 }
 
-// ===== Like =====
 function toggleLikeGlobal(btn) {
     let span = btn.querySelector('.like-count');
     if (!span) return;
@@ -229,7 +218,6 @@ function toggleLikeGlobal(btn) {
     localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
 }
 
-// ===== Save =====
 function toggleSaveGlobal(btn) {
     let post = btn.closest('.post');
     let titleEl = post.querySelector('.accent-title') || post.querySelector('h2');
@@ -252,7 +240,6 @@ function toggleSaveGlobal(btn) {
     localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
 }
 
-// ===== Follow =====
 function toggleFollow(btn) {
     let lang = localStorage.getItem('site_lang') || 'ar';
     let isAr = (lang === 'ar');
@@ -274,7 +261,6 @@ function toggleFollow(btn) {
     }
 }
 
-// ===== Comments =====
 function toggleCommentSection(btn) {
     let post = btn.closest('.post');
     let section = post.querySelector('.comment-section');
@@ -354,7 +340,6 @@ function deleteInlineComment(btn) {
     setTimeout(() => commentItem.remove(), 200);
 }
 
-// ===== CSS Animation (inject once) =====
 if(!document.getElementById('shared-anim-style')) {
     let style = document.createElement('style');
     style.id = 'shared-anim-style';

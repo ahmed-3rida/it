@@ -1,4 +1,4 @@
-// جميع الـ functions المشتركة (like, save, follow, comment) موجودة في shared.js
+
 
 function filterUsers() {
     let input = document.getElementById('searchInput').value.toLowerCase();

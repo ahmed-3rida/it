@@ -16,7 +16,7 @@ let currentChat = 'Ahmed Mohamed';
             document.addEventListener("DOMContentLoaded", function() {
                 loadChatMessages(currentChat);
                 
-                // Allow hitting Enter to send
+
                 document.getElementById('msgInput').addEventListener('keydown', function(e) {
                     if (e.key === 'Enter') sendMessage();
                 });
@@ -25,13 +25,13 @@ let currentChat = 'Ahmed Mohamed';
             function switchChat(chatId, element) {
                 currentChat = chatId;
                 
-                // Update active class on contacts
+
                 document.querySelectorAll('.chat-contact').forEach(el => {
                     el.style.background = '';
                 });
                 element.style.background = 'var(--hover-bg)';
                 
-                // Update title
+
                 let titleEl = document.getElementById('activeChatTitle');
                 let isAr = (localStorage.getItem('site_lang') || 'ar') === 'ar';
                 if(chatId === 'Ahmed Mohamed') {
@@ -44,17 +44,17 @@ let currentChat = 'Ahmed Mohamed';
                     titleEl.innerText = isAr ? 'سارة علي' : 'Sara Ali';
                 }
                 
-                // Load messages for this chat
+
                 loadChatMessages(chatId);
             }
 
             function loadChatMessages(chatId) {
                 let messagesContainer = document.getElementById('chatMessages');
-                messagesContainer.innerHTML = ''; // Clear current messages
+                messagesContainer.innerHTML = '';
                 
                 let saved = JSON.parse(localStorage.getItem('chat_' + chatId) || '[]');
                 
-                // Default messages if empty
+
                 if(saved.length === 0) {
                     if(chatId === 'Ahmed Mohamed') {
                         saved = [
@@ -81,7 +81,7 @@ let currentChat = 'Ahmed Mohamed';
                     div.style.padding = '10px 15px';
                     div.style.borderRadius = '15px';
                     
-                    // Fallback to msg.text if textEn is not available, or display text directly if it's just a string (old format)
+
                     if(typeof msg === 'string') {
                         div.innerText = msg;
                     } else {
@@ -108,9 +108,9 @@ let currentChat = 'Ahmed Mohamed';
                 div.innerText = text;
                 messages.appendChild(div);
                 
-                // Save
+
                 let saved = JSON.parse(localStorage.getItem('chat_' + currentChat) || '[]');
-                // Convert old string arrays to objects if needed
+
                 if(saved.length > 0 && typeof saved[0] === 'string') {
                     saved = saved.map(s => ({sender: 'me', text: s, textEn: s}));
                 }

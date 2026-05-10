@@ -1,4 +1,4 @@
-// صفحة إنشاء المنشور
+
 
 document.addEventListener("DOMContentLoaded", function() {
         let select = document.getElementById('postCategory');

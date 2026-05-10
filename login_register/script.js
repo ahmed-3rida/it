@@ -17,7 +17,7 @@ function showTab(tab) {
 }
 
 function doLogin(username) {
-    // حفظ حالة تسجيل الدخول واسم المستخدم
+
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('username', username || 'مستخدم');
     window.location.href = '../home/index.html';

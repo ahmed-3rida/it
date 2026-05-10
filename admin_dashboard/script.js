@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
             list.appendChild(li);
         });
         
-        // Update total posts counter based on dynamic posts (plus some dummy static ones)
+
         document.getElementById('totalPosts').innerText = (3400 + posts.length).toLocaleString();
     }
 

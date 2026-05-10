@@ -1,5 +1,3 @@
-// جميع الـ functions المشتركة (like, save, follow, comment) موجودة في shared.js
-
 function switchDashTab(tabNum) {
     for (let i = 1; i <= 3; i++) {
         document.getElementById('content' + i).classList.remove('active');
@@ -16,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
 function renderUserDashboard() {
     let lang = localStorage.getItem('site_lang') || 'ar';
 
-    // My Posts
     let myPosts = JSON.parse(localStorage.getItem('myPosts') || '[]');
     let c1 = document.getElementById('content1');
     c1.innerHTML = '';
@@ -37,7 +34,6 @@ function renderUserDashboard() {
         });
     }
 
-    // Saved Posts
     let savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
     let c2 = document.getElementById('content2');
     c2.innerHTML = '';
@@ -56,7 +52,6 @@ function renderUserDashboard() {
         });
     }
 
-    // Liked Posts
     let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
     let c3 = document.getElementById('content3');
     c3.innerHTML = '';
