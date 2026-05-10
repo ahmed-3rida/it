@@ -1,5 +1,6 @@
-// ===== اللغة =====
 document.addEventListener("DOMContentLoaded", function() {
+    applyTheme();
+    
     let lang = localStorage.getItem('site_lang') || 'ar';
     applyLanguage(lang);
     updateAuthNav();
@@ -18,6 +19,21 @@ function toggleLang(e) {
     let currentLang = localStorage.getItem('site_lang') || 'ar';
     let newLang = currentLang === 'ar' ? 'en' : 'ar';
     changeLanguage(newLang);
+}
+
+// ===== الوضع الصباحي والمسائي (Dark/Light Mode) =====
+function toggleTheme() {
+    const isLight = document.body.classList.toggle('light-mode');
+    localStorage.setItem('site_theme', isLight ? 'light' : 'dark');
+}
+
+function applyTheme() {
+    const savedTheme = localStorage.getItem('site_theme') || 'dark';
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+    } else {
+        document.body.classList.remove('light-mode');
+    }
 }
 
 function applyLanguage(lang) {

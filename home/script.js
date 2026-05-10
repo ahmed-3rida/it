@@ -1,4 +1,13 @@
     document.addEventListener("DOMContentLoaded", function() {
+        // تنظيف المنشورات القديمة لمنع التكرار مع الـ HTML الثابت
+        let currentPosts = JSON.parse(localStorage.getItem('myPosts') || '[]');
+        let filteredPosts = currentPosts.filter(p => !p.title.includes("UniSkills Social!") && !p.title.includes("كيف تبدأ في تعلم"));
+        localStorage.setItem('myPosts', JSON.stringify(filteredPosts));
+
+        let currentPolls = JSON.parse(localStorage.getItem('customPolls') || '[]');
+        let filteredPolls = currentPolls.filter(p => !p.question.includes("ما هي لغة البرمجة") && !p.question.includes("ما هو الهاتف الذكي"));
+        localStorage.setItem('customPolls', JSON.stringify(filteredPolls));
+
         let name = localStorage.getItem('username') || '';
         let avatarEl = document.getElementById('homeUserAvatar');
         if(name && avatarEl) {
@@ -14,7 +23,7 @@
         // Sort by ID descending (newest first)
         combinedFeed.sort((a, b) => (b.id || 0) - (a.id || 0));
         
-        let welcomeBar = document.querySelector('.container-box');
+        let welcomeBar = document.getElementById('mainWelcomeBar') || document.querySelector('.container-box');
         let urlParams = new URLSearchParams(window.location.search);
         let currentCategory = urlParams.get('category');
         if (currentCategory) {
@@ -121,6 +130,8 @@
             }
             welcomeBar.insertAdjacentElement('afterend', div);
         });
+
+        applyLanguage(localStorage.getItem('site_lang') || 'ar');
     });
 
     function handleHomeVote(e, pollId) {

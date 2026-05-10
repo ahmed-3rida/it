@@ -21,6 +21,7 @@
         <nav class="nav-links">
             <a href="../home/index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
             <a href="../profile/index.html" data-ar="الملف الشخصي" data-en="Profile">الملف الشخصي</a>
+            <button onclick="toggleTheme()" class="lang-btn" title="Toggle Theme">🌓</button>
             <button onclick="toggleLang(event)" class="lang-btn" data-ar="English" data-en="العربية">English</button>
             <a href="../login_register/index.html" class="auth-nav-link" data-ar="دخول/تسجيل"
                 data-en="Login/Register">دخول/تسجيل</a>
@@ -59,7 +60,7 @@
 
         <main class="main-content">
             <!-- Welcome bar -->
-            <div class="container-box"
+            <div class="container-box" id="mainWelcomeBar"
                 style="display:flex; align-items:center; gap:16px; padding:16px 20px; margin-bottom:16px;">
                 <div id="homeUserAvatar"
                     style="width:48px; height:48px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900; color:white; flex-shrink:0;">
@@ -71,6 +72,95 @@
                 <a href="../create_post/index.html" class="btn" data-ar="📝 نشر" data-en="📝 Post">📝 نشر</a>
             </div>
 
+            <!-- Hardcoded Feeds (Static for Demo) -->
+            <div class="post" data-post-id="static-1">
+                <div class="post-header">
+                    <div class="left">
+                        <div class="avatar" style="background:#7e57c2;">S</div>
+                        <div>
+                            <div class="username">Sara Ali</div>
+                            <div class="time" data-ar="منذ 5 دقائق" data-en="5 mins ago">منذ 5 دقائق</div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="accent-title" style="font-size:18px; margin-bottom:8px;"
+                    data-ar="كيف تبدأ في تعلم تطوير الويب؟ 🌐" data-en="How to start web development? 🌐"></h2>
+                <p style="color:var(--text-secondary); line-height:1.7; margin:0;"
+                    data-ar="البداية دائماً تكون بتعلم HTML و CSS ثم الانتقال لـ JavaScript. لا تنسى التطبيق العملي وبناء مشاريع حقيقية!"
+                    data-en="Start with HTML/CSS then move to JavaScript. Don't forget to build real projects!">
+                </p>
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80"
+                    style="width:100%; border-radius:10px; max-height:400px; object-fit:cover; margin-top:10px;">
+                <div class="post-actions">
+                    <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span data-ar="أعجبني" data-en="Like">أعجبني</span> (<span class="like-count">12</span>)</button>
+                    <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span data-ar="تعليق" data-en="Comment">تعليق</span> (<span class="comment-count">0</span>)</button>
+                    <button class="action-btn" onclick="toggleSaveGlobal(this)">🔖 <span data-ar="حفظ" data-en="Save">حفظ</span></button>
+                </div>
+                <div class="comment-section" style="display:none;">
+                    <div class="comment-input-row">
+                        <input type="text" data-ar-placeholder="أضف تعليقاً..." data-en-placeholder="Add a comment..." style="flex:1; padding:10px 14px; border-radius:50px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);" onkeydown="if(event.key==='Enter') addInlineComment(this.nextElementSibling)">
+                        <button class="btn" style="border-radius:50px; padding:10px 18px;" data-ar="إضافة" data-en="Add" onclick="addInlineComment(this)">إضافة</button>
+                    </div>
+                    <div class="comments-list"></div>
+                </div>
+            </div>
+
+            <div class="post" data-post-id="static-2">
+                <div class="post-header">
+                    <div class="left">
+                        <div class="avatar" style="background:#26a69a;">A</div>
+                        <div>
+                            <div class="username">Ahmed Mohamed</div>
+                            <div class="time" data-ar="منذ ساعة" data-en="1 hour ago">منذ ساعة</div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="accent-title" style="font-size:18px; margin-bottom:8px;"
+                    data-ar="مستقبل العمل الحر في 2026 💼" data-en="Future of Freelancing in 2026 💼"></h2>
+                <p style="color:var(--text-secondary); line-height:1.7; margin:0;"
+                    data-ar="العمل الحر أصبح خياراً استراتيجياً للكثير من المبرمجين والمصممين. ما هي المنصة التي تفضل العمل عليها؟"
+                    data-en="Freelancing has become a strategic choice for many. Which platform do you prefer?">
+                </p>
+                <div class="post-actions">
+                    <button class="action-btn" onclick="toggleLikeGlobal(this)">👍 <span data-ar="أعجبني" data-en="Like">أعجبني</span> (<span class="like-count">8</span>)</button>
+                    <button class="action-btn" onclick="toggleCommentSection(this)">💬 <span data-ar="تعليق" data-en="Comment">تعليق</span> (<span class="comment-count">0</span>)</button>
+                    <button class="action-btn" onclick="toggleSaveGlobal(this)">🔖 <span data-ar="حفظ" data-en="Save">حفظ</span></button>
+                </div>
+                <div class="comment-section" style="display:none;">
+                    <div class="comment-input-row">
+                        <input type="text" data-ar-placeholder="أضف تعليقاً..." data-en-placeholder="Add a comment..." style="flex:1; padding:10px 14px; border-radius:50px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);" onkeydown="if(event.key==='Enter') addInlineComment(this.nextElementSibling)">
+                        <button class="btn" style="border-radius:50px; padding:10px 18px;" data-ar="إضافة" data-en="Add" onclick="addInlineComment(this)">إضافة</button>
+                    </div>
+                    <div class="comments-list"></div>
+                </div>
+            </div>
+
+            <div class="post" data-post-id="static-poll">
+                <div class="post-header">
+                    <div class="left">
+                        <div class="avatar" style="background:var(--accent);">📊</div>
+                        <div>
+                            <div class="username" data-ar="استطلاع رأي نشط" data-en="Active Poll">استطلاع رأي نشط</div>
+                            <div class="time" data-ar="منذ ساعتين" data-en="2 hours ago">منذ ساعتين</div>
+                        </div>
+                    </div>
+                </div>
+                <h3 style="margin-bottom:15px; color:var(--text-primary); font-size:18px;"
+                    data-ar="ما هي لغة البرمجة المفضلة لديك حالياً؟ 💻"
+                    data-en="What is your favorite programming language right now? 💻"></h3>
+                <form id="staticPollForm" onsubmit="event.preventDefault(); document.getElementById('staticPollResults').style.display='block'; this.style.display='none'; showToast('تم التصويت بنجاح!', 'success');">
+                    <div style="margin-bottom: 10px;"><label><input type="radio" name="p1" required> JavaScript</label></div>
+                    <div style="margin-bottom: 10px;"><label><input type="radio" name="p1"> Python</label></div>
+                    <div style="margin-bottom: 10px;"><label><input type="radio" name="p1"> Java</label></div>
+                    <button type="submit" class="btn" style="margin-top:10px;" data-ar="تصويت" data-en="Vote">تصويت</button>
+                </form>
+                <div id="staticPollResults" style="display:none; margin-top:15px;">
+                    <div style="margin-bottom: 10px;">JavaScript (60%) - 120 <div style="background: var(--bg-color); height: 10px; border-radius: 5px;"><div style="background: var(--accent); height: 10px; border-radius: 5px; width: 60%;"></div></div></div>
+                    <div style="margin-bottom: 10px;">Python (30%) - 60 <div style="background: var(--bg-color); height: 10px; border-radius: 5px;"><div style="background: var(--accent); height: 10px; border-radius: 5px; width: 30%;"></div></div></div>
+                    <div style="margin-bottom: 10px;">Java (10%) - 20 <div style="background: var(--bg-color); height: 10px; border-radius: 5px;"><div style="background: var(--accent); height: 10px; border-radius: 5px; width: 10%;"></div></div></div>
+                </div>
+            </div>
+
         </main>
     </div>
 
@@ -79,4 +169,3 @@
 </body>
 
 </html>
-

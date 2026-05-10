@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
 
 :root {
+    /* Dark Mode (Default) */
     --bg-color: #0f1117;
     --card-bg: #1a1f2e;
     --card-bg2: #1e2435;
@@ -13,6 +14,18 @@
     --success: #10b981;
     --danger: #ef4444;
     --navbar-height: 64px;
+}
+
+body.light-mode {
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+    --card-bg2: #f8f9fa;
+    --text-primary: #1c1e21;
+    --text-secondary: #65676b;
+    --accent: #0079d3;
+    --accent-hover: #005fa3;
+    --border-color: #dddfe2;
+    --hover-bg: #e4e6eb;
 }
 
 * { box-sizing: border-box; }
@@ -48,7 +61,8 @@ a { text-decoration: none; color: inherit; }
     height: var(--navbar-height);
     gap: 15px;
     backdrop-filter: blur(10px);
-    background: rgba(26, 31, 46, 0.95);
+    background: var(--card-bg);
+    opacity: 0.98;
 }
 
 .navbar .logo { 
