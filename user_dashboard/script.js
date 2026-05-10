@@ -1,152 +1,98 @@
+// جميع الـ functions المشتركة (like, save, follow, comment) موجودة في shared.js
 
-
-// ===== Like =====
-function toggleLikeGlobal(btn) {
-    let span = btn.querySelector('.like-count');
-    if (!span) return;
-    
-    let post = btn.closest('.post');
-    let titleEl = post.querySelector('.accent-title') || post.querySelector('h2');
-    let title = titleEl ? titleEl.innerText : 'منشور';
-    let postId = post.getAttribute('data-post-id') || title;
-    
-    let count = parseInt(span.innerText);
-    let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
-
-    if (btn.classList.contains('liked')) {
-        btn.classList.remove('liked');
-        btn.style.color = '';
-        btn.style.transform = '';
-        span.innerText = count - 1;
-        likedPosts = likedPosts.filter(p => p.id !== postId);
-    } else {
-        btn.classList.add('liked');
-        btn.style.color = 'var(--accent)';
-        btn.style.transform = 'scale(1.1)';
-        setTimeout(() => { btn.style.transform = ''; }, 200);
-        span.innerText = count + 1;
-        if (!likedPosts.find(p => p.id === postId)) {
-            likedPosts.push({ id: postId, title: title });
-        }
+function switchDashTab(tabNum) {
+    for (let i = 1; i <= 3; i++) {
+        document.getElementById('content' + i).classList.remove('active');
+        document.getElementById('tab' + i).classList.remove('active');
     }
-    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    document.getElementById('content' + tabNum).classList.add('active');
+    document.getElementById('tab' + tabNum).classList.add('active');
 }
 
-// ===== Save =====
-function toggleSaveGlobal(btn) {
-    let post = btn.closest('.post');
-    let titleEl = post.querySelector('.accent-title') || post.querySelector('h2');
-    let title = titleEl ? titleEl.innerText : 'منشور';
-    let postId = post.getAttribute('data-post-id') || title;
+document.addEventListener("DOMContentLoaded", function () {
+    renderUserDashboard();
+});
 
+function renderUserDashboard() {
+    let lang = localStorage.getItem('site_lang') || 'ar';
+
+    // My Posts
+    let myPosts = JSON.parse(localStorage.getItem('myPosts') || '[]');
+    let c1 = document.getElementById('content1');
+    c1.innerHTML = '';
+    if (myPosts.length === 0) {
+        c1.innerHTML = `<p style="color:var(--text-secondary);">${lang === 'ar' ? 'لا توجد منشورات.' : 'No posts yet.'}</p>`;
+    } else {
+        myPosts.slice().reverse().forEach(p => {
+            let div = document.createElement('div');
+            div.className = 'post';
+            div.style.cssText = 'border: 1px solid var(--border-color); margin-bottom: 15px;';
+            div.innerHTML = `
+                <h4 style="margin: 0 0 10px 0; color: var(--text-primary);">${p.title}</h4>
+                <p style="margin: 0 0 15px 0;">${p.content}</p>
+                ${p.media ? `<img src="${p.media}" style="width:100%; border-radius:10px; max-height:300px; object-fit:cover; margin-bottom:15px;">` : ''}
+                <button class="btn" style="background: #e74c3c; padding: 5px 10px;" onclick="deleteMyPost('${p.id}')" data-ar="حذف المنشور" data-en="Delete Post">${lang === 'ar' ? 'حذف المنشور' : 'Delete Post'}</button>
+            `;
+            c1.appendChild(div);
+        });
+    }
+
+    // Saved Posts
     let savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
-    let isSaved = btn.classList.contains('saved');
-    let lang = localStorage.getItem('site_lang') || 'ar';
-
-    if (isSaved) {
-        btn.classList.remove('saved');
-        btn.style.color = '';
-        savedPosts = savedPosts.filter(p => p.id !== postId);
-        showToast(lang === 'ar' ? 'تمت الإزالة من المحفوظات' : 'Removed from saved', 'info');
+    let c2 = document.getElementById('content2');
+    c2.innerHTML = '';
+    if (savedPosts.length === 0) {
+        c2.innerHTML = `<p style="color:var(--text-secondary);">${lang === 'ar' ? 'لا توجد محفوظات.' : 'No saved posts.'}</p>`;
     } else {
-        btn.classList.add('saved');
-        btn.style.color = 'var(--accent)';
-        if (!savedPosts.find(p => p.id === postId)) {
-            savedPosts.push({ id: postId, title: title });
-        }
-        showToast(lang === 'ar' ? 'تم الحفظ!' : 'Saved!', 'success');
+        savedPosts.slice().reverse().forEach(p => {
+            let div = document.createElement('div');
+            div.className = 'post';
+            div.style.cssText = 'border: 1px solid var(--border-color); margin-bottom: 15px;';
+            div.innerHTML = `
+                <h4 style="margin: 0 0 10px 0; color: var(--text-primary);">${p.title}</h4>
+                <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="removeSaved('${p.id}')">${lang === 'ar' ? 'إزالة من المحفوظات' : 'Unsave'}</button>
+            `;
+            c2.appendChild(div);
+        });
     }
-    localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
-}
 
-// ===== Follow =====
-function toggleFollow(btn) {
-    let lang = localStorage.getItem('site_lang') || 'ar';
-    let isAr = (lang === 'ar');
-    let followTextAr = '+ متابعة';
-    let followTextEn = '+ Follow';
-    let unfollowTextAr = 'إلغاء المتابعة';
-    let unfollowTextEn = 'Unfollow';
-
-    let currentText = btn.innerText.trim();
-
-    if(currentText === followTextAr || currentText === followTextEn) {
-        btn.innerText = isAr ? unfollowTextAr : unfollowTextEn; 
-        btn.setAttribute('data-ar', unfollowTextAr);
-        btn.setAttribute('data-en', unfollowTextEn);
-        btn.classList.remove('btn-secondary');
-        showToast(isAr ? 'تمت المتابعة!' : 'Followed!', 'success');
+    // Liked Posts
+    let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    let c3 = document.getElementById('content3');
+    c3.innerHTML = '';
+    if (likedPosts.length === 0) {
+        c3.innerHTML = `<p style="color:var(--text-secondary);">${lang === 'ar' ? 'لا توجد إعجابات.' : 'No liked posts.'}</p>`;
     } else {
-        btn.innerText = isAr ? followTextAr : followTextEn; 
-        btn.setAttribute('data-ar', followTextAr);
-        btn.setAttribute('data-en', followTextEn);
-        btn.classList.add('btn-secondary');
-        showToast(isAr ? 'تم إلغاء المتابعة' : 'Unfollowed', 'info');
+        likedPosts.slice().reverse().forEach(p => {
+            let div = document.createElement('div');
+            div.className = 'post';
+            div.style.cssText = 'border: 1px solid var(--border-color); margin-bottom: 15px;';
+            div.innerHTML = `
+                <h4 style="margin: 0 0 10px 0; color: var(--text-primary);">${p.title}</h4>
+                <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="removeLiked('${p.id}')">${lang === 'ar' ? 'إزالة الإعجاب' : 'Unlike'}</button>
+            `;
+            c3.appendChild(div);
+        });
     }
 }
 
-// ===== Comments =====
-function toggleCommentSection(btn) {
-    let post = btn.closest('.post');
-    let section = post.querySelector('.comment-section');
-    let input = section ? section.querySelector('input[type="text"]') : null;
-    
-    if (section.style.display === 'none' || section.style.display === '') {
-        section.style.display = 'block';
-        section.style.animation = 'slideDown 0.3s ease';
-        if(input) setTimeout(() => input.focus(), 100);
-    } else {
-        section.style.display = 'none';
-    }
+function deleteMyPost(id) {
+    let posts = JSON.parse(localStorage.getItem('myPosts') || '[]');
+    posts = posts.filter(p => String(p.id) !== String(id));
+    localStorage.setItem('myPosts', JSON.stringify(posts));
+    renderUserDashboard();
 }
 
-function addInlineComment(btn) {
-    let section = btn.closest('.comment-section');
-    let input = section.querySelector('input[type="text"]');
-    let list = section.querySelector('.comments-list');
-    let countSpan = btn.closest('.post').querySelector('.comment-count');
-    
-    if (!input || input.value.trim() === '') return;
-    
-    let lang = localStorage.getItem('site_lang') || 'ar';
-    let youText = (lang === 'en') ? 'You' : 'أنت';
-    let deleteText = (lang === 'en') ? 'Delete' : 'حذف';
-    let username = localStorage.getItem('username') || youText;
-    
-    let div = document.createElement('div');
-    div.className = 'comment-item';
-    div.style.cssText = 'background: var(--bg-color); padding: 10px 14px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; animation: slideDown 0.2s ease;';
-    
-    div.innerHTML = `
-        <div style="display:flex; align-items:center; gap:10px;">
-            <div style="width:32px; height:32px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:bold; color:white; flex-shrink:0;">
-                ${(username.charAt(0) || '?').toUpperCase()}
-            </div>
-            <div>
-                <strong style="color:var(--accent); font-size:13px;">${username}</strong>
-                <p style="margin:2px 0 0; font-size:14px;">${input.value}</p>
-            </div>
-        </div>
-        <button class="btn" style="padding: 4px 10px; font-size: 12px; background: rgba(231,76,60,0.2); color:#ef4444; border:1px solid rgba(231,76,60,0.3);" onclick="deleteInlineComment(this)">${deleteText}</button>
-    `;
-    
-    list.prepend(div);
-    if(countSpan) countSpan.innerText = parseInt(countSpan.innerText) + 1;
-    input.value = '';
-    input.focus();
+function removeSaved(id) {
+    let saved = JSON.parse(localStorage.getItem('savedPosts') || '[]');
+    saved = saved.filter(p => String(p.id) !== String(id));
+    localStorage.setItem('savedPosts', JSON.stringify(saved));
+    renderUserDashboard();
 }
 
-function deleteInlineComment(btn) {
-    let post = btn.closest('.post');
-    let countSpan = post ? post.querySelector('.comment-count') : null;
-    let item = btn.closest('.comment-item');
-    item.style.opacity = '0';
-    item.style.transition = 'opacity 0.2s';
-    setTimeout(() => {
-        item.remove();
-        if(countSpan) {
-            let c = parseInt(countSpan.innerText);
-            countSpan.innerText = Math.max(0, c - 1);
-        }
-    }, 200);
+function removeLiked(id) {
+    let liked = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    liked = liked.filter(p => String(p.id) !== String(id));
+    localStorage.setItem('likedPosts', JSON.stringify(liked));
+    renderUserDashboard();
 }

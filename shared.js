@@ -202,6 +202,158 @@ function timeAgo(timestamp) {
     return lang === 'en' ? 'Just now' : 'الآن';
 }
 
+// ===== Like =====
+function toggleLikeGlobal(btn) {
+    let span = btn.querySelector('.like-count');
+    if (!span) return;
+    let post = btn.closest('.post');
+    let titleEl = post.querySelector('.accent-title') || post.querySelector('h2');
+    let title = titleEl ? titleEl.innerText : 'منشور';
+    let postId = post.getAttribute('data-post-id') || title;
+    let count = parseInt(span.innerText);
+    let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    if (btn.classList.contains('liked')) {
+        btn.classList.remove('liked');
+        btn.style.color = '';
+        btn.style.transform = '';
+        span.innerText = count - 1;
+        likedPosts = likedPosts.filter(p => p.id !== postId);
+    } else {
+        btn.classList.add('liked');
+        btn.style.color = 'var(--accent)';
+        btn.style.transform = 'scale(1.1)';
+        setTimeout(() => { btn.style.transform = ''; }, 200);
+        span.innerText = count + 1;
+        if (!likedPosts.find(p => p.id === postId)) likedPosts.push({ id: postId, title: title });
+    }
+    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+}
+
+// ===== Save =====
+function toggleSaveGlobal(btn) {
+    let post = btn.closest('.post');
+    let titleEl = post.querySelector('.accent-title') || post.querySelector('h2');
+    let title = titleEl ? titleEl.innerText : 'منشور';
+    let postId = post.getAttribute('data-post-id') || title;
+    let savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
+    let isSaved = btn.classList.contains('saved');
+    let lang = localStorage.getItem('site_lang') || 'ar';
+    if (isSaved) {
+        btn.classList.remove('saved');
+        btn.style.color = '';
+        savedPosts = savedPosts.filter(p => p.id !== postId);
+        showToast(lang === 'ar' ? 'تمت الإزالة من المحفوظات' : 'Removed from saved', 'info');
+    } else {
+        btn.classList.add('saved');
+        btn.style.color = 'var(--accent)';
+        if (!savedPosts.find(p => p.id === postId)) savedPosts.push({ id: postId, title: title });
+        showToast(lang === 'ar' ? 'تم الحفظ!' : 'Saved!', 'success');
+    }
+    localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
+}
+
+// ===== Follow =====
+function toggleFollow(btn) {
+    let lang = localStorage.getItem('site_lang') || 'ar';
+    let isAr = (lang === 'ar');
+    let followTextAr = '+ متابعة', followTextEn = '+ Follow';
+    let unfollowTextAr = 'إلغاء المتابعة', unfollowTextEn = 'Unfollow';
+    let currentText = btn.innerText.trim();
+    if (currentText === followTextAr || currentText === followTextEn) {
+        btn.innerText = isAr ? unfollowTextAr : unfollowTextEn;
+        btn.setAttribute('data-ar', unfollowTextAr);
+        btn.setAttribute('data-en', unfollowTextEn);
+        btn.classList.remove('btn-secondary');
+        showToast(isAr ? 'تمت المتابعة!' : 'Followed!', 'success');
+    } else {
+        btn.innerText = isAr ? followTextAr : followTextEn;
+        btn.setAttribute('data-ar', followTextAr);
+        btn.setAttribute('data-en', followTextEn);
+        btn.classList.add('btn-secondary');
+        showToast(isAr ? 'تم إلغاء المتابعة' : 'Unfollowed', 'info');
+    }
+}
+
+// ===== Comments =====
+function toggleCommentSection(btn) {
+    let post = btn.closest('.post');
+    let section = post.querySelector('.comment-section');
+    let input = section ? section.querySelector('input[type="text"]') : null;
+    if (section.style.display === 'none' || section.style.display === '') {
+        section.style.display = 'block';
+        section.style.animation = 'slideDown 0.3s ease';
+        if (input) setTimeout(() => input.focus(), 100);
+    } else {
+        section.style.display = 'none';
+    }
+}
+
+function addInlineComment(btn) {
+    let post = btn.closest('.post');
+    let postId = post ? post.getAttribute('data-post-id') : null;
+    let section = post.querySelector('.comment-section');
+    let input = section.querySelector('input[type="text"]');
+    let list = section.querySelector('.comments-list');
+    let countSpan = post.querySelector('.comment-count');
+    if (!input || input.value.trim() === '') return;
+    let lang = localStorage.getItem('site_lang') || 'ar';
+    let username = localStorage.getItem('username') || (lang === 'en' ? 'You' : 'أنت');
+    let newComment = { id: Date.now(), author: username, text: input.value.trim() };
+    if (postId) {
+        let allComments = JSON.parse(localStorage.getItem('allComments') || '{}');
+        if (!allComments[postId]) allComments[postId] = [];
+        allComments[postId].push(newComment);
+        localStorage.setItem('allComments', JSON.stringify(allComments));
+        if (countSpan) countSpan.innerText = allComments[postId].length;
+    } else {
+        if (countSpan) countSpan.innerText = parseInt(countSpan.innerText) + 1;
+    }
+    renderSingleComment(list, newComment, lang);
+    input.value = '';
+    input.focus();
+}
+
+function renderSingleComment(container, comment, lang) {
+    let deleteText = (lang === 'en') ? 'Delete' : 'حذف';
+    let div = document.createElement('div');
+    div.className = 'comment-item';
+    div.setAttribute('data-comment-id', comment.id);
+    div.innerHTML = `
+        <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:32px; height:32px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:bold; color:white; flex-shrink:0;">
+                ${(comment.author.charAt(0) || '?').toUpperCase()}
+            </div>
+            <div>
+                <strong style="color:var(--accent); font-size:13px;">${comment.author}</strong>
+                <p style="margin:2px 0 0; font-size:14px;">${comment.text}</p>
+            </div>
+        </div>
+        <button class="btn" style="padding: 4px 10px; font-size: 12px; background: rgba(231,76,60,0.2); color:#ef4444; border:1px solid rgba(231,76,60,0.3);" onclick="deleteInlineComment(this)">${deleteText}</button>
+    `;
+    container.prepend(div);
+}
+
+function deleteInlineComment(btn) {
+    let post = btn.closest('.post');
+    let postId = post ? post.getAttribute('data-post-id') : null;
+    let commentItem = btn.closest('.comment-item');
+    let commentId = commentItem.getAttribute('data-comment-id');
+    let countSpan = post ? post.querySelector('.comment-count') : null;
+    if (postId) {
+        let allComments = JSON.parse(localStorage.getItem('allComments') || '{}');
+        if (allComments[postId]) {
+            allComments[postId] = allComments[postId].filter(c => String(c.id) !== String(commentId));
+            localStorage.setItem('allComments', JSON.stringify(allComments));
+            if (countSpan) countSpan.innerText = allComments[postId].length;
+        }
+    } else {
+        if (countSpan) countSpan.innerText = Math.max(0, parseInt(countSpan.innerText) - 1);
+    }
+    commentItem.style.opacity = '0';
+    commentItem.style.transition = 'opacity 0.2s';
+    setTimeout(() => commentItem.remove(), 200);
+}
+
 // ===== CSS Animation (inject once) =====
 if(!document.getElementById('shared-anim-style')) {
     let style = document.createElement('style');
